@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact | ALT-FIX</title>
+  <meta name="description" content="ALT-FIX — Montage PC, dépannage et installation informatique à domicile (Genlis / Dijon). Devis gratuit.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script defer src="assets/js/script.js"></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <img src="assets/img/logo.svg" alt="ALT-FIX logo" width="38" height="38">
+      <span>ALT-FIX</span>
+    </a>
+    <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+    <nav class="menu">
+      <a href="index.html" class="">Accueil</a>
+      <a href="services.html" class="">Services</a>
+      <a href="tarifs.html" class="">Tarifs</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+  </div>
+</header>
+<main>
+
+<section class="section">
+  <div class="container contact">
+    <div>
+      <h1 class="section-title">Contact</h1>
+      <form id="contactForm" novalidate>
+        <label>Nom<input type="text" name="name" required></label>
+        <label>Email<input type="email" name="email" required></label>
+        <label>Sujet<input type="text" name="subject"></label>
+        <label>Message<textarea name="message" rows="5" required></textarea></label>
+        <label class="consent"><input type="checkbox" required> J’accepte d’être recontacté au sujet de ma demande.</label>
+        <button type="submit" class="btn primary">Envoyer</button>
+        <p class="form-msg" aria-live="polite"></p>
+      </form>
+    </div>
+    <aside class="card contact-info">
+      <h3>Coordonnées</h3>
+      <ul>
+        <li>✉ <a href="mailto:alt-fix@outlook.fr">alt-fix@outlook.fr</a></li>
+        <li>📞 <a href="tel:+33651440382">06 51 44 03 82</a></li>
+        <li>📍 Genlis / Dijon et alentours</li>
+        <li>💬 <a href="https://wa.me/33651440382" target="_blank" rel="noopener">WhatsApp</a></li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="container foot">
+    <div class="foot-brand">
+      <img src="assets/img/logo.svg" alt="ALT-FIX logo" width="28" height="28">
+      <strong>ALT-FIX</strong>
+    </div>
+    <div class="foot-columns">
+      <div>
+        <h4>Coordonnées</h4>
+        <ul>
+          <li><a href="mailto:alt-fix@outlook.fr">alt-fix@outlook.fr</a></li>
+          <li><a href="tel:+33651440382">06 51 44 03 82</a></li>
+          <li>Genlis / Dijon et alentours</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Liens</h4>
+        <ul>
+          <li><a href="services.html">Nos services</a></li>
+          <li><a href="tarifs.html">Tarifs</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="legal">Micro-entrepreneur — TVA non applicable, art. 293 B du CGI.</p>
+    <p class="copy">© 2025 ALT-FIX. Tous droits réservés.</p>
+  </div>
+</footer>
+</body>
+</html>

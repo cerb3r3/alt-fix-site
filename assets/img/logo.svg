@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <rect width="128" height="128" rx="18" fill="#0b1220" stroke="#38bdf8" stroke-width="4"/>
+  <g fill="none" stroke="#38bdf8" stroke-width="4" stroke-linecap="round">
+    <path d="M18 44h20m10 0h18m10 0h18"/>
+    <path d="M18 64h28m12 0h34"/>
+    <path d="M18 84h18m12 0h44"/>
+  </g>
+  <text x="64" y="108" text-anchor="middle" font-family="Inter, Arial" font-weight="700" font-size="28" fill="#38bdf8">ALT-FIX</text>
+</svg>

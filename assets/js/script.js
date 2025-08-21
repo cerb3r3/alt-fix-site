@@ -1,0 +1,2 @@
+const burger=document.querySelector('.burger');const menu=document.querySelector('.menu');if(burger&&menu){burger.addEventListener('click',()=>{const open=menu.classList.toggle('open');burger.setAttribute('aria-expanded',open?'true':'false');});}
+const form=document.getElementById('contactForm');if(form){form.addEventListener('submit',(e)=>{e.preventDefault();const msg=form.querySelector('.form-msg');msg.textContent='Merci ! Votre message a bien été pris en compte (simulation).';form.reset();});}

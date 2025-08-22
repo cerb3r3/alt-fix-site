@@ -21,32 +21,69 @@
     </a>
     <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
     <nav class="menu">
-      <a href="index.html" class="">Accueil</a>
-      <a href="services.html" class="">Services</a>
+      <a href="index.html">Accueil</a>
+      <a href="services.html">Services</a>
       <a href="tarifs.html" class="active">Tarifs</a>
-      <a href="contact.html" class="">Contact</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </div>
 </header>
+
 <main>
+  <section class="section">
+    <div class="container">
+      <h1 class="section-title">Tarifs indicatifs</h1>
 
-<section class="section">
-  <div class="container">
-    <h1 class="section-title">Tarifs indicatifs</h1>
-    <div class="grid3">
-      <div class="card price"><h3>Diagnostic</h3><p class="price-tag">Gratuit</p><p>Évaluation rapide et devis.</p></div>
-      <div class="card price"><h3>Dépannage à domicile (1h)</h3><p class="price-tag">45 €</p><p>+30 € / h suppl.</p></div>
-      <div class="card price"><h3>Montage PC</h3><p class="price-tag">80–150 €</p><p>Selon complexité.</p></div>
-      <div class="card price"><h3>Réinstallation Windows</h3><p class="price-tag">50 €</p><p>Avec sauvegarde en option.</p></div>
-      <div class="card price"><h3>Nettoyage & optimisation</h3><p class="price-tag">40 €</p><p>Logiciel + matériel (hors pièces).</p></div>
-      <div class="card price"><h3>Installation périphérique</h3><p class="price-tag">25 €</p><p>Imprimante, écran, etc.</p></div>
+      <!-- Mention claire "hors pièces" -->
+      <p class="note" style="margin-top:-8px">
+        Les montants indiqués sont <strong>hors pièces</strong> (composants, licences, accessoires).  
+        Devis gratuit avant intervention.
+      </p>
+
+      <div class="grid3">
+        <div class="card price">
+          <h3>Diagnostic</h3>
+          <p class="price-tag">Gratuit</p>
+          <p>Évaluation rapide et devis.</p>
+        </div>
+
+        <div class="card price">
+          <h3>Dépannage à domicile (1h)</h3>
+          <p class="price-tag">45 €</p>
+          <p>+ 30 € / h suppl. <br>(hors pièces éventuelles).</p>
+        </div>
+
+        <div class="card price">
+          <h3>Montage PC</h3>
+          <p class="price-tag">80–150 €</p>
+          <p>Selon complexité (hors composants).</p>
+        </div>
+
+        <div class="card price">
+          <h3>Réinstallation Windows</h3>
+          <p class="price-tag">50 €</p>
+          <p>Sauvegarde en option (hors licence si nécessaire).</p>
+        </div>
+
+        <div class="card price">
+          <h3>Nettoyage & optimisation</h3>
+          <p class="price-tag">40 €</p>
+          <p>Logiciel + matériel (hors pièces).</p>
+        </div>
+
+        <div class="card price">
+          <h3>Installation périphérique</h3>
+          <p class="price-tag">25 €</p>
+          <p>Imprimante, écran, etc. (hors accessoires).</p>
+        </div>
+      </div>
+
+      <p class="note">TVA non applicable, art. 293 B du CGI.</p>
+      <div class="center"><a class="btn primary" href="contact.html">Demander un devis</a></div>
     </div>
-    <p class="note">Tarifs indicatifs. Devis gratuit. TVA non applicable, art. 293 B du CGI.</p>
-    <div class="center"><a class="btn primary" href="contact.html">Demander un devis</a></div>
-  </div>
-</section>
-
+  </section>
 </main>
+
 <footer class="site-footer">
   <div class="container foot">
     <div class="foot-brand">
@@ -75,6 +112,7 @@
     <p class="copy">© 2025 ALT-FIX. Tous droits réservés.</p>
   </div>
 </footer>
+
 <!-- 🎵 Musique de fond + contrôles -->
 <audio id="bg-music" autoplay muted></audio>
 

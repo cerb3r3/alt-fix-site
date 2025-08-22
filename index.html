@@ -1,91 +1,74 @@
-<!doctype html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Accueil | ALT-FIX</title>
-  <meta name="description" content="ALT-FIX — Montage PC, dépannage et installation informatique à domicile (Genlis / Dijon). Devis gratuit.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" href="assets/img/favicon.png" type="image/png">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <script defer src="assets/js/script.js"></script>
-</head>
-<body>
-<header class="site-header">
-  <div class="container nav">
-    <a class="brand" href="index.html">
-      <img src="assets/img/logo.svg" alt="ALT-FIX logo" width="38" height="38">
-      <span>ALT-FIX</span>
-    </a>
-    <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
-    <nav class="menu">
-      <a href="index.html" class="active">Accueil</a>
-      <a href="services.html">Services</a>
-      <a href="tarifs.html">Tarifs</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
-</header>
+// ==============================
+// ALT-FIX — script global
+// ==============================
 
-<main>
-  <section class="hero">
-    <div class="container hero-inner">
-      <div class="hero-text">
-        <h1>Votre expert informatique</h1>
-        <p>Montage PC • Dépannage • Installation à domicile (Genlis / Dijon)</p>
-        <div class="cta">
-          <a class="btn primary" href="contact.html">Demander un devis</a>
-          <a class="btn ghost" href="services.html">Voir les services</a>
-        </div>
-      </div>
-      <div class="hero-art" aria-hidden="true">
-        <div class="chip"></div>
-      </div>
-    </div>
-  </section>
+// Burger menu (mobile)
+const burger = document.querySelector('.burger');
+const menu = document.querySelector('.menu');
+if (burger && menu) {
+  burger.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', String(open));
+  });
+}
 
-  <section class="why">
-    <div class="container grid4">
-      <div class="card"><h3>Réactif</h3><p>Intervention rapide, RDV flexibles, suivi après service.</p></div>
-      <div class="card"><h3>Transparent</h3><p>Tarifs clairs, devis gratuit avant toute intervention.</p></div>
-      <div class="card"><h3>Garantie</h3><p>Travaux soignés, conseils sur-mesure et durables.</p></div>
-      <div class="card"><h3>Local</h3><p>Genlis, Dijon et alentours. Déplacement possible.</p></div>
-    </div>
-  </section>
-</main>
+// ==============================
+// 🎵 Musique de fond (playlist + reprise entre pages)
+// ==============================
+const tracks = [
+  "assets/music/piano-chill.wav",
+  "assets/music/lofi-soft.wav",
+  "assets/music/ambient-light.wav"
+];
 
-<footer class="site-footer">
-  <div class="container foot">
-    <div class="foot-brand">
-      <img src="assets/img/logo.svg" alt="ALT-FIX logo" width="28" height="28">
-      <strong>ALT-FIX</strong>
-    </div>
-    <div class="foot-columns">
-      <div>
-        <h4>Coordonnées</h4>
-        <ul>
-          <li><a href="mailto:alt-fix@outlook.fr">alt-fix@outlook.fr</a></li>
-          <li><a href="tel:+33651440382">06 51 44 03 82</a></li>
-          <li>Genlis / Dijon et alentours</li>
-        </ul>
-      </div>
-      <div>
-        <h4>Liens</h4>
-        <ul>
-          <li><a href="services.html">Nos services</a></li>
-          <li><a href="tarifs.html">Tarifs</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-    <p class="legal">Micro-entrepreneur — TVA non applicable, art. 293 B du CGI.</p>
-    <p class="copy">© 2025 ALT-FIX. Tous droits réservés.</p>
-  </div>
-</footer>
- // Bouton musique
-  function toggleMusic() {
+let currentTrack = 0;
+let music; // sera défini après DOMContentLoaded
+
+window.addEventListener('DOMContentLoaded', () => {
+  music = document.getElementById('bg-music');
+  if (!music) return;
+
+  // Charger une piste
+  function loadAndPlay(i) {
+    currentTrack = i % tracks.length;
+    music.src = tracks[currentTrack];
+    music.load();
+    music.play().catch(() => {});
+  }
+
+  // ---------- Reprise depuis localStorage ----------
+  const savedTrack = localStorage.getItem("musicTrack");
+  const savedTime = localStorage.getItem("musicTime");
+  const savedMuted = localStorage.getItem("musicMuted");
+
+  if (savedTrack !== null) {
+    loadAndPlay(parseInt(savedTrack));
+  } else {
+    loadAndPlay(0);
+  }
+
+  music.addEventListener("loadeddata", () => {
+    if (savedTime !== null) {
+      music.currentTime = parseFloat(savedTime);
+    }
+    if (savedMuted === "false") {
+      music.muted = false;
+      music.play().catch(()=>{});
+    }
+  });
+
+  // ---------- Enchaînement automatique ----------
+  music.addEventListener("ended", () => loadAndPlay(currentTrack + 1));
+
+  // ---------- Sauvegarde avant de quitter ----------
+  window.addEventListener("beforeunload", () => {
+    localStorage.setItem("musicTrack", currentTrack);
+    localStorage.setItem("musicTime", music.currentTime);
+    localStorage.setItem("musicMuted", music.muted);
+  });
+
+  // ---------- Bouton toggle ----------
+  window.toggleMusic = function () {
     if (music.muted) {
       music.muted = false;
       music.play().catch(()=>{});
@@ -93,16 +76,21 @@
       music.muted = true;
       music.pause();
     }
+    localStorage.setItem("musicMuted", music.muted);
+  };
+
+  // ---------- Volume ----------
+  window.setVolume = function (v) {
+    const vol = Math.max(0, Math.min(1, parseFloat(v)));
+    music.volume = vol;
+    localStorage.setItem('musicVolume', String(vol));
+  };
+
+  // Restaurer volume sauvegardé
+  const savedVol = localStorage.getItem('musicVolume');
+  if (savedVol !== null) {
+    music.volume = parseFloat(savedVol);
+    const volInput = document.getElementById('music-volume');
+    if (volInput) volInput.value = String(music.volume);
   }
-<!-- 🎵 Musique de fond + contrôles -->
-<audio id="bg-music" autoplay muted></audio>
-
-<div class="music-ctl">
-  <label for="music-volume">🔊 Volume</label>
-  <input id="music-volume" type="range" min="0" max="1" step="0.05" value="0.2" oninput="setVolume(this.value)">
-</div>
-
-<button onclick="toggleMusic()" class="btn music">🎵 Musique</button>
-
-</body>
-</html>
+});

@@ -88,21 +88,6 @@
 </footer>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const audio = document.getElementById('bg-music');
-  const btn   = document.getElementById('play-toggle');
-  const vol   = document.getElementById('volume');
-  if (!audio || !btn || !vol) return;
-  audio.src = 'assets/music/videoplayback.m4a';
-  audio.volume = parseFloat(vol.value || '0.2');
-  const updateBtn = () => btn.textContent = audio.paused ? '▶️ Lancer' : '⏸️ Pause';
-  btn.addEventListener('click', () => { audio.paused ? audio.play().catch(()=>{}) : audio.pause(); });
-  vol.addEventListener('input', e => { audio.volume = parseFloat(e.target.value || '0.2'); });
-  audio.addEventListener('play', updateBtn);
-  audio.addEventListener('pause', updateBtn);
-  updateBtn();
-});
-
 
 </body>
 </html>

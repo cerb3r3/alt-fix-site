@@ -1,62 +1,69 @@
 // ==============================
-// ALT-FIX — script global
+// ALT-FIX — Script global
 // ==============================
 
-// Burger menu (mobile)
-const burger = document.querySelector('.burger');
-const menu = document.querySelector('.menu');
-if (burger && menu) {
+// ---------- Burger menu (mobile)
+(() => {
+  const burger = document.querySelector('.burger');
+  const menu   = document.querySelector('.menu');
+  if (!burger || !menu) return;
+
   burger.addEventListener('click', () => {
     const open = menu.classList.toggle('open');
     burger.setAttribute('aria-expanded', String(open));
   });
-}
+})();
 
 // ==============================
-// 🎵 Musique de fond (playlist)
+// 🎵 Lecteur simple (1 piste, Play/Pause + Volume)
 // ==============================
-const tracks = [
-  "assets/music/piano-chill.wav",
-  "assets/music/lofi-soft.wav",
-  "assets/music/ambient-light.wav"
-];
+(() => {
+  const AUDIO_SRC = 'assets/music/videoplayback.m4a'; // ton fichier m4a
 
-let currentTrack = 0;
+  let audio;
 
-window.addEventListener('DOMContentLoaded', () => {
-  const music = document.getElementById('bg-music');
-  if (!music) return;
+  function byId(id){ return document.getElementById(id); }
 
-  // Volume doux
-  music.volume = 0.2;
+  function initPlayer(){
+    audio = byId('bg-music');
+    if (!audio) return;
 
-  // Restaure le choix utilisateur (mute ON/OFF) entre les pages
-  const savedMuted = localStorage.getItem('musicMuted');
-  if (savedMuted !== null) music.muted = savedMuted === 'true';
+    audio.src = AUDIO_SRC;
+    audio.preload = 'metadata';
+    const savedVol = localStorage.getItem('musicVolume');
+    audio.volume = savedVol ? Math.min(1, Math.max(0, parseFloat(savedVol))) : 0.2;
 
-  function loadAndPlay(i) {
-    currentTrack = i % tracks.length;
-    music.src = tracks[currentTrack];
-    music.load();
-    music.play().catch(() => {
-      // Autoplay bloqué tant que l'utilisateur n'a pas interagi : normal
-    });
+    const btn = byId('play-toggle');
+    function syncBtn(){
+      if (!btn) return;
+      btn.textContent = audio.paused ? '▶️ Lancer' : '⏸️ Pause';
+    }
+    if (btn){
+      btn.addEventListener('click', async () => {
+        try {
+          if (audio.paused) { await audio.play(); }
+          else { audio.pause(); }
+        } catch(e){}
+        syncBtn();
+      });
+    }
+
+    const vol = byId('volume');
+    if (vol){
+      vol.value = String(audio.volume);
+      vol.addEventListener('input', () => {
+        const v = Math.min(1, Math.max(0, parseFloat(vol.value)));
+        audio.volume = isNaN(v) ? audio.volume : v;
+        localStorage.setItem('musicVolume', String(audio.volume));
+      });
+    }
+
+    audio.addEventListener('play',  syncBtn);
+    audio.addEventListener('pause', syncBtn);
+    audio.addEventListener('ended', syncBtn);
+
+    syncBtn();
   }
 
-  // Lance la première piste (navigateur : start muted)
-  loadAndPlay(0);
-
-  // Enchaîne les titres
-  music.addEventListener('ended', () => loadAndPlay(currentTrack + 1));
-
-  // Expose le toggle pour le bouton HTML
-  window.toggleMusic = function () {
-    music.muted = !music.muted;
-    localStorage.setItem('musicMuted', String(music.muted));
-    if (!music.muted) {
-      music.play().catch(() => {});
-    } else {
-      music.pause();
-    }
-  };
-});
+  window.addEventListener('DOMContentLoaded', initPlayer);
+})();

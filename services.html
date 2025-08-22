@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Services | ALT-FIX</title>
-  <meta name="description" content="ALT-FIX — Montage PC, dépannage et installation informatique à domicile (Genlis / Dijon). Devis gratuit.">
+  <meta name="description" content="Montage PC, réparation, installation et dépannage informatique à domicile (Genlis / Dijon).">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -21,68 +21,60 @@
     </a>
     <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
     <nav class="menu">
-      <a href="index.html" class="">Accueil</a>
+      <a href="index.html">Accueil</a>
       <a href="services.html" class="active">Services</a>
-      <a href="tarifs.html" class="">Tarifs</a>
-      <a href="contact.html" class="">Contact</a>
+      <a href="tarifs.html">Tarifs</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </div>
 </header>
+
 <main>
+  <section class="section">
+    <div class="container">
+      <h1 class="section-title">Nos services</h1>
 
-<section class="section">
-  <div class="container">
-    <h1 class="section-title">Nos services</h1>
-    <div class="grid3">
-      <article class="card">
-        <h3>Montage PC sur mesure</h3>
-        <ul>
-          <li>Conseil composants selon usage et budget</li>
-          <li>Assemblage, câblage propre, tests</li>
-          <li>Installation Windows / pilotes / mises à jour</li>
-        </ul>
-      </article>
-      <article class="card">
-        <h3>Dépannage informatique</h3>
-        <ul>
-          <li>Diagnostics, lenteurs, virus</li>
-          <li>Réinstallation / récupération de session</li>
-          <li>Nettoyage logiciel & matériel</li>
-        </ul>
-      </article>
-      <article class="card">
-        <h3>Installation & configuration</h3>
-        <ul>
-          <li>Périphériques (imprimantes, écrans, etc.)</li>
-          <li>Réseaux locaux domestiques (hors box internet)</li>
-          <li>Drivers, logiciels, sauvegardes</li>
-        </ul>
-      </article>
-      <article class="card">
-        <h3>Maintenance & optimisation</h3>
-        <ul>
-          <li>Mises à jour, sécurité, performances</li>
-          <li>Nettoyage poussière, pâte thermique</li>
-        </ul>
-      </article>
-      <article class="card">
-        <h3>Assistance & formation</h3>
-        <ul>
-          <li>Prise en main PC / outils</li>
-          <li>Bonnes pratiques de sécurité</li>
-        </ul>
-      </article>
+      <div class="grid3">
+        <div class="card">
+          <h3>Montage PC</h3>
+          <p>Assemblage propre, gestion des câbles, installation OS et pilotes.</p>
+        </div>
+        <div class="card">
+          <h3>Dépannage</h3>
+          <p>Diagnostic, réparation logiciel/matériel, nettoyage système.</p>
+        </div>
+        <div class="card">
+          <h3>Installation</h3>
+          <p>Wifi/box, imprimantes, écrans, périphériques et logiciels.</p>
+        </div>
+        <div class="card">
+          <h3>Optimisation</h3>
+          <p>Amélioration performances, conseils upgrade (SSD, RAM, GPU).</p>
+        </div>
+        <div class="card">
+          <h3>Sauvegarde & Récupération</h3>
+          <p>Mise en place backup, récupération de données (selon cas).</p>
+        </div>
+        <div class="card">
+          <h3>Conseil</h3>
+          <p>Achat/upgrade sur mesure selon votre budget et vos besoins.</p>
+        </div>
+      </div>
+
+      <div class="center" style="margin-top:24px">
+        <a class="btn primary" href="contact.html">Demander un devis</a>
+      </div>
     </div>
-  </div>
-</section>
-
+  </section>
 </main>
+
 <footer class="site-footer">
   <div class="container foot">
     <div class="foot-brand">
       <img src="assets/img/logo.svg" alt="ALT-FIX logo" width="28" height="28">
       <strong>ALT-FIX</strong>
     </div>
+
     <div class="foot-columns">
       <div>
         <h4>Coordonnées</h4>
@@ -101,20 +93,18 @@
         </ul>
       </div>
     </div>
+
     <p class="legal">Micro-entrepreneur — TVA non applicable, art. 293 B du CGI.</p>
     <p class="copy">© 2025 ALT-FIX. Tous droits réservés.</p>
+
+    <!-- 🎵 Lecteur (même footer partout) -->
+    <audio id="bg-music"></audio>
+    <div class="player-ctl" role="group" aria-label="Contrôles musique">
+      <button id="play-toggle" class="btn music" type="button">▶️ Lancer</button>
+      <label for="volume" class="sr-only">Volume</label>
+      <input id="volume" type="range" min="0" max="1" step="0.05" value="0.2" aria-label="Volume">
+    </div>
   </div>
 </footer>
-<!-- 🎵 Lecteur simple (1 piste .m4a) -->
-<audio id="bg-music"></audio>
-
-<div class="player-ctl">
-  <button id="play-toggle" class="btn music">▶️ Lancer</button>
-  <label for="volume">🔊</label>
-  <input id="volume" type="range" min="0" max="1" step="0.05" value="0.2">
-</div>
-
-
-
 </body>
 </html>

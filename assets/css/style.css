@@ -1,50 +1,143 @@
-/* Accessibilité : caché visuellement mais dispo lecteurs d'écran */
-.sr-only{
-  position:absolute!important;
-  width:1px;height:1px;
-  margin:-1px;border:0;padding:0;
-  white-space:nowrap;clip-path:inset(50%);clip:rect(0 0 0 0);overflow:hidden;
+/* ================================
+   Accessibilité : élément caché visuellement
+   mais lisible par les lecteurs d'écran
+   ================================ */
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0;
+  clip: rect(0 0 0 0);         /* compat */
+  clip-path: inset(50%);       /* moderne */
 }
 
-/* Lecteur intégré au footer */
+/* Variante focusable si besoin (à utiliser via .sr-only.sr-only-focusable) */
+.sr-only.sr-only-focusable:focus,
+.sr-only.sr-only-focusable:active {
+  position: static !important;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  clip-path: none;
+  white-space: normal;
+}
+
+/* ================================
+   Lecteur intégré au footer
+   ================================ */
 .player-ctl{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-top:16px;
-  padding-top:8px;
-  border-top:1px dashed #1b2636;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px dashed #1b2636;
 }
 
+/* Bouton musique */
 .player-ctl .btn.music{
-  padding:10px 14px;
-  border-radius:10px;
-  border:1px solid rgba(56,189,248,.4);
-  background:var(--card);
-  color:var(--text);
-  font-weight:600;
-  cursor:pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(56,189,248,.35);
+  background: var(--card);
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .08s ease, background .15s ease, border-color .15s ease;
+  box-shadow: 0 1px 0 rgba(0,0,0,.3), inset 0 0 0 9999px rgba(56,189,248,.03);
 }
 .player-ctl .btn.music:hover{
-  background:rgba(56,189,248,.1);
+  background: rgba(56,189,248,.10);
+  border-color: rgba(56,189,248,.55);
+}
+.player-ctl .btn.music:active{
+  transform: translateY(1px);
+}
+.player-ctl .btn.music:focus-visible{
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
-/* Slider volume */
+/* ================================
+   Slider volume (styling cross-browser)
+   ================================ */
 .player-ctl input[type="range"]{
-  width:180px;
-  accent-color:var(--accent);
-  background:transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 180px;
+  height: 28px;
+  background: transparent;
+  cursor: pointer;
 }
 
-/* Mobile */
+/* Track */
+.player-ctl input[type="range"]::-webkit-slider-runnable-track{
+  height: 6px;
+  background: linear-gradient(90deg, var(--accent) 0, var(--accent)) left/var(--_fill,0%) 100% no-repeat,
+              #203043;
+  border-radius: 999px;
+}
+.player-ctl input[type="range"]::-moz-range-track{
+  height: 6px;
+  background: #203043;
+  border-radius: 999px;
+}
+
+/* Thumb */
+.player-ctl input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  margin-top: -5px;             /* centre le thumb sur un track de 6px */
+  border-radius: 50%;
+  background: var(--accent);
+  border: 0;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.25);
+}
+.player-ctl input[type="range"]::-moz-range-thumb{
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 0;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.25);
+}
+
+/* Focus visible sur le slider */
+.player-ctl input[type="range"]:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(56,189,248,.35);
+  border-radius: 8px;
+}
+
+/* Remplissage du track côté gauche (Chrome/Edge) */
+.player-ctl input[type="range"]{
+  --_fill: calc(var(--val, .2) * 100%);
+}
+.player-ctl input[type="range"]{
+  /* JS: mettra --val via style.setProperty('--val', value) pour animer le fill */
+}
+
+/* ================================
+   Mobile
+   ================================ */
 @media (max-width:560px){
   .player-ctl{
-    flex-direction:column;
-    align-items:flex-start; /* mets center si tu préfères */
-    gap:8px;
+    flex-direction: column;
+    align-items: flex-start;  /* mets center si tu préfères */
+    gap: 10px;
   }
   .player-ctl input[type="range"]{
-    width:100%;
+    width: 100%;
   }
 }
-

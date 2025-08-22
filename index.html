@@ -22,39 +22,40 @@
     <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
     <nav class="menu">
       <a href="index.html" class="active">Accueil</a>
-      <a href="services.html" class="">Services</a>
-      <a href="tarifs.html" class="">Tarifs</a>
-      <a href="contact.html" class="">Contact</a>
+      <a href="services.html">Services</a>
+      <a href="tarifs.html">Tarifs</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </div>
 </header>
-<main>
 
-<section class="hero">
-  <div class="container hero-inner">
-    <div class="hero-text">
-      <h1>Votre expert informatique</h1>
-      <p>Montage PC • Dépannage • Installation à domicile (Genlis / Dijon)</p>
-      <div class="cta">
-        <a class="btn primary" href="contact.html">Demander un devis</a>
-        <a class="btn ghost" href="services.html">Voir les services</a>
+<main>
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <h1>Votre expert informatique</h1>
+        <p>Montage PC • Dépannage • Installation à domicile (Genlis / Dijon)</p>
+        <div class="cta">
+          <a class="btn primary" href="contact.html">Demander un devis</a>
+          <a class="btn ghost" href="services.html">Voir les services</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="chip"></div>
       </div>
     </div>
-    <div class="hero-art" aria-hidden="true">
-      <div class="chip"></div>
-    </div>
-  </div>
-</section>
-<section class="why">
-  <div class="container grid4">
-    <div class="card"><h3>Réactif</h3><p>Intervention rapide, RDV flexibles, suivi après service.</p></div>
-    <div class="card"><h3>Transparent</h3><p>Tarifs clairs, devis gratuit avant toute intervention.</p></div>
-    <div class="card"><h3>Garantie</h3><p>Travaux soignés, conseils sur-mesure et durables.</p></div>
-    <div class="card"><h3>Local</h3><p>Genlis, Dijon et alentours. Déplacement possible.</p></div>
-  </div>
-</section>
+  </section>
 
+  <section class="why">
+    <div class="container grid4">
+      <div class="card"><h3>Réactif</h3><p>Intervention rapide, RDV flexibles, suivi après service.</p></div>
+      <div class="card"><h3>Transparent</h3><p>Tarifs clairs, devis gratuit avant toute intervention.</p></div>
+      <div class="card"><h3>Garantie</h3><p>Travaux soignés, conseils sur-mesure et durables.</p></div>
+      <div class="card"><h3>Local</h3><p>Genlis, Dijon et alentours. Déplacement possible.</p></div>
+    </div>
+  </section>
 </main>
+
 <footer class="site-footer">
   <div class="container foot">
     <div class="foot-brand">
@@ -83,5 +84,47 @@
     <p class="copy">© 2025 ALT-FIX. Tous droits réservés.</p>
   </div>
 </footer>
+
+<!-- 🎵 Musique de fond -->
+<audio id="bg-music" autoplay muted></audio>
+<button onclick="toggleMusic()" class="btn">🎵 Musique</button>
+
+<script>
+  const tracks = [
+    "assets/music/piano-chill.mp3",
+    "assets/music/lofi-soft.mp3",
+    "assets/music/ambient-light.mp3"
+  ];
+
+  let currentTrack = 0;
+  const music = document.getElementById("bg-music");
+
+  function loadAndPlay(i){
+    currentTrack = i % tracks.length;
+    music.src = tracks[currentTrack];
+    music.load();
+    music.play().catch(()=>{});
+  }
+
+  // Première musique
+  loadAndPlay(0);
+
+  // Passe à la suivante quand une musique est finie
+  music.addEventListener("ended", () => {
+    loadAndPlay(currentTrack + 1);
+  });
+
+  // Bouton musique
+  function toggleMusic() {
+    if (music.muted) {
+      music.muted = false;
+      music.play().catch(()=>{});
+    } else {
+      music.muted = true;
+      music.pause();
+    }
+  }
+</script>
+
 </body>
 </html>

@@ -96,5 +96,14 @@ document.addEventListener('DOMContentLoaded', () => {
   updateBtn();
 });
 </script>
+<!-- 🎵 Musique de fond -->
+<audio id="bg-music" src="assets/music/videoplayback.m4a" loop></audio>
+
+<div class="player-ctl">
+  <button id="play-toggle" class="btn music">▶️ Lancer</button>
+  <label for="volume">🔊</label>
+  <input id="volume" type="range" min="0" max="1" step="0.05" value="0.2">
+</div>
+
 </body>
 </html>

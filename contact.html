@@ -21,42 +21,71 @@
     </a>
     <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
     <nav class="menu">
-      <a href="index.html" class="">Accueil</a>
-      <a href="services.html" class="">Services</a>
-      <a href="tarifs.html" class="">Tarifs</a>
+      <a href="index.html">Accueil</a>
+      <a href="services.html">Services</a>
+      <a href="tarifs.html">Tarifs</a>
       <a href="contact.html" class="active">Contact</a>
     </nav>
   </div>
 </header>
+
 <main>
+  <section class="section">
+    <div class="container contact">
+      <div>
+        <h1 class="section-title">Contact</h1>
 
-<section class="section">
-  <div class="container contact">
-    <div>
-      <h1 class="section-title">Contact</h1>
-      <form id="contactForm" novalidate>
-        <label>Nom<input type="text" name="name" required></label>
-        <label>Email<input type="email" name="email" required></label>
-        <label>Sujet<input type="text" name="subject"></label>
-        <label>Message<textarea name="message" rows="5" required></textarea></label>
-        <label class="consent"><input type="checkbox" required> J’accepte d’être recontacté au sujet de ma demande.</label>
-        <button type="submit" class="btn primary">Envoyer</button>
-        <p class="form-msg" aria-live="polite"></p>
-      </form>
+        <!-- ==== Formulaire UNIQUE, stylé + branché FormSubmit ==== -->
+        <form target="_blank" action="https://formsubmit.co/alt-fix@outlook.fr" method="POST">
+          <label>Nom
+            <input type="text" name="name" required>
+          </label>
+
+          <label>Email
+            <input type="email" name="email" required>
+          </label>
+
+          <label>Sujet
+            <!-- IMPORTANT : name="_subject" pour FormSubmit -->
+            <input type="text" name="_subject" required>
+          </label>
+
+          <label>Message
+            <textarea name="message" rows="5" required></textarea>
+          </label>
+
+          <label class="consent">
+            <input type="checkbox" required>
+            J’accepte d’être recontacté au sujet de ma demande.
+          </label>
+
+          <!-- Champs cachés FormSubmit -->
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="https://cerb3r3.github.io/alt-fix-site/merci.html">
+          <input type="hidden" name="_autoresponse" value="Merci pour votre message 🙏. Nous revenons vers vous au plus vite.">
+          <!-- Honeypot anti-spam -->
+          <input type="text" name="_honey" style="display:none">
+
+          <button type="submit" class="btn primary">Envoyer</button>
+          <!-- (on ne met plus de .form-msg ici car on laisse FormSubmit gérer la redirection) -->
+        </form>
+        <!-- ==== /Formulaire ==== -->
+      </div>
+
+      <aside class="card contact-info">
+        <h3>Coordonnées</h3>
+        <ul>
+          <li>✉ <a href="mailto:alt-fix@outlook.fr">alt-fix@outlook.fr</a></li>
+          <li>📞 <a href="tel:+33651440382">06 51 44 03 82</a></li>
+          <li>📍 Genlis / Dijon et alentours</li>
+          <li>💬 <a href="https://wa.me/33651440382" target="_blank" rel="noopener">WhatsApp</a></li>
+        </ul>
+      </aside>
     </div>
-    <aside class="card contact-info">
-      <h3>Coordonnées</h3>
-      <ul>
-        <li>✉ <a href="mailto:alt-fix@outlook.fr">alt-fix@outlook.fr</a></li>
-        <li>📞 <a href="tel:+33651440382">06 51 44 03 82</a></li>
-        <li>📍 Genlis / Dijon et alentours</li>
-        <li>💬 <a href="https://wa.me/33651440382" target="_blank" rel="noopener">WhatsApp</a></li>
-      </ul>
-    </aside>
-  </div>
-</section>
-
+  </section>
 </main>
+
 <footer class="site-footer">
   <div class="container foot">
     <div class="foot-brand">
@@ -85,46 +114,6 @@
     <p class="copy">© 2025 ALT-FIX. Tous droits réservés.</p>
   </div>
 </footer>
-
- <!-- ===== Formulaire de contact ===== -->
-<div class="container">
-  <h1>Contact</h1>
-  <form target="_blank" action="https://formsubmit.co/alt-fix@outlook.fr" method="POST">
-    
-    <!-- Nom -->
-    <div class="form-group">
-      <input type="text" name="name" class="form-control" placeholder="Votre nom complet" required>
-    </div>
-
-    <!-- Email -->
-    <div class="form-group">
-      <input type="email" name="email" class="form-control" placeholder="Votre adresse email" required>
-    </div>
-
-    <!-- Sujet -->
-    <div class="form-group">
-      <input type="text" name="_subject" class="form-control" placeholder="Sujet du message" required>
-    </div>
-
-    <!-- Message -->
-    <div class="form-group">
-      <textarea name="message" class="form-control" placeholder="Votre message" rows="8" required></textarea>
-    </div>
-
-    <!-- Champs cachés -->
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_next" value="https://cerb3r3.github.io/alt-fix-site/merci.html">
-    <input type="hidden" name="_autoresponse" value="Merci pour votre message 🙏. Nous revenons vers vous au plus vite.">
-
-    <!-- Honeypot anti-spam -->
-    <input type="text" name="_honey" style="display:none">
-
-    <!-- Bouton -->
-    <button type="submit" class="btn btn-lg btn-dark btn-block">Envoyer</button>
-  </form>
-</div>
-<!-- ===== /Formulaire ===== -->
 
 </body>
 </html>

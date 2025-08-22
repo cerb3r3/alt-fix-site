@@ -85,35 +85,6 @@
   </div>
 </footer>
 
-<!-- 🎵 Musique de fond -->
-<audio id="bg-music" autoplay muted></audio>
-<button onclick="toggleMusic()" class="btn">🎵 Musique</button>
-
-<script>
-  const tracks = [
-    "assets/music/piano-chill.mp3",
-    "assets/music/lofi-soft.mp3",
-    "assets/music/ambient-light.mp3"
-  ];
-
-  let currentTrack = 0;
-  const music = document.getElementById("bg-music");
-
-  function loadAndPlay(i){
-    currentTrack = i % tracks.length;
-    music.src = tracks[currentTrack];
-    music.load();
-    music.play().catch(()=>{});
-  }
-
-  // Première musique
-  loadAndPlay(0);
-
-  // Passe à la suivante quand une musique est finie
-  music.addEventListener("ended", () => {
-    loadAndPlay(currentTrack + 1);
-  });
-
   // Bouton musique
   function toggleMusic() {
     if (music.muted) {

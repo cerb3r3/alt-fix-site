@@ -16,8 +16,7 @@
 <header class="site-header">
   <div class="container nav">
     <a class="brand" href="index.html">
-      <img src="assets/img/logo.svg" alt="ALT-FIX logo" width="38" height="38">
-      <span>ALT-FIX</span>
+      <img src="assets/img/logo.svg" alt="ALT-FIX logo" width="38" height="38"><span>ALT-FIX</span>
     </a>
     <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
     <nav class="menu">
@@ -40,13 +39,11 @@
           <a class="btn ghost" href="services.html">Voir les services</a>
         </div>
       </div>
-      <div class="hero-art" aria-hidden="true">
-        <div class="chip"></div>
-      </div>
+      <div class="hero-art" aria-hidden="true"><div class="chip"></div></div>
     </div>
   </section>
 
-  <section class="why">
+  <section class="section">
     <div class="container grid4">
       <div class="card"><h3>Réactif</h3><p>Intervention rapide, RDV flexibles, suivi après service.</p></div>
       <div class="card"><h3>Transparent</h3><p>Tarifs clairs, devis gratuit avant toute intervention.</p></div>
@@ -58,10 +55,7 @@
 
 <footer class="site-footer">
   <div class="container foot">
-    <div class="foot-brand">
-      <img src="assets/img/logo.svg" alt="ALT-FIX logo" width="28" height="28">
-      <strong>ALT-FIX</strong>
-    </div>
+    <div class="foot-brand"><img src="assets/img/logo.svg" alt="ALT-FIX logo" width="28" height="28"><strong>ALT-FIX</strong></div>
     <div class="foot-columns">
       <div>
         <h4>Coordonnées</h4>
@@ -84,13 +78,34 @@
     <p class="copy">© 2025 ALT-FIX. Tous droits réservés.</p>
 
     <!-- 🎵 Lecteur simple -->
-    <audio id="bg-music"></audio>
+    <audio id="bg-music" preload="metadata"></audio>
     <div class="player-ctl">
       <button id="play-toggle" class="btn music" type="button">▶️ Lancer</button>
       <label for="volume" class="sr-only">Volume</label>
-      <input id="volume" type="range" min="0" max="1" step="0.05" value="0.2" aria-label="Volume">
+      <input id="volume" type="range" min="0" max="1" step="0.05" value="0.2">
     </div>
   </div>
 </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const audio = document.getElementById('bg-music');
+  const btn   = document.getElementById('play-toggle');
+  const vol   = document.getElementById('volume');
+  if (!audio || !btn || !vol) return;
+
+  audio.src = 'assets/music/videoplayback.m4a';   // nom du fichier musique
+  audio.volume = parseFloat(vol.value || '0.2');
+
+  const updateBtn = () => btn.textContent = audio.paused ? '▶️ Lancer' : '⏸️ Pause';
+
+  btn.addEventListener('click', () => { audio.paused ? audio.play().catch(()=>{}) : audio.pause(); });
+  vol.addEventListener('input', e => { audio.volume = parseFloat(e.target.value || '0.2'); });
+
+  audio.addEventListener('play', updateBtn);
+  audio.addEventListener('pause', updateBtn);
+  updateBtn();
+});
+</script>
 </body>
 </html>

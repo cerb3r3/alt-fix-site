@@ -36,7 +36,7 @@
 
       <!-- Mention claire "hors pièces" -->
       <p class="note" style="margin-top:-8px">
-        Les montants indiqués sont <strong>hors pièces</strong> (composants, licences, accessoires).  
+        Les montants indiqués sont <strong>hors pièces</strong> (composants, licences, accessoires).
         Devis gratuit avant intervention.
       </p>
 
@@ -114,15 +114,18 @@
 </footer>
 
 <!-- 🎵 Lecteur simple (1 piste .m4a) -->
-<audio id="bg-music"></audio>
+<audio id="bg-music" preload="metadata">
+  <!-- Le type "audio/mp4" convient pour la plupart des .m4a -->
+  <source src="assets/music/videoplayback.m4a" type="audio/mp4">
+  <!-- Fallback texte si le navigateur ne supporte pas l'audio -->
+  Votre navigateur ne supporte pas la lecture audio.
+</audio>
 
 <div class="player-ctl">
   <button id="play-toggle" class="btn music">▶️ Lancer</button>
   <label for="volume">🔊</label>
   <input id="volume" type="range" min="0" max="1" step="0.05" value="0.2">
 </div>
-
-
 
 </body>
 </html>

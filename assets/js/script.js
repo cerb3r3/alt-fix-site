@@ -14,64 +14,45 @@
   });
 })();
 
-// ==============================
-// 🎵 Lecteur simple (1 piste, Play/Pause + Volume)
-// ==============================
+// ---------- Lecteur musique simple (1 piste)
 (() => {
-  // Ton fichier (mets-le à: assets/music/videoplayback.m4a)
-  const AUDIO_SRC = 'assets/music/videoplayback.m4a';
+  window.addEventListener('DOMContentLoaded', () => {
+    const audio  = document.getElementById('bg-music');
+    const btn    = document.getElementById('play-toggle');
+    const volInp = document.getElementById('volume');
 
-  let audio;
+    // Si la page n'a pas le lecteur, on ignore
+    if (!audio || !btn || !volInp) return;
 
-  const $ = (id) => document.getElementById(id);
-
-  function initPlayer(){
-    audio = $('bg-music');
-    if (!audio) return;
-
-    // Source + options
-    audio.src = AUDIO_SRC;
+    // ⚠️ Mets ton fichier ici (place-le dans /assets/music/)
+    audio.src = 'assets/music/videoplayback.m4a';
     audio.preload = 'metadata';
 
-    // Volume initial (restauré si déjà réglé)
-    const savedVol = localStorage.getItem('musicVolume');
-    audio.volume = savedVol ? Math.min(1, Math.max(0, parseFloat(savedVol))) : 0.2;
+    // Volume initial (depuis l'input)
+    audio.volume = parseFloat(volInp.value || '0.2');
 
-    // --- Bouton Play/Pause
-    const btn = $('play-toggle');
-    const syncBtn = () => { if (btn) btn.textContent = audio.paused ? '▶️ Lancer' : '⏸️ Pause'; };
+    // Bouton lecture/pause
+    const setBtnLabel = () => { btn.textContent = audio.paused ? '▶️ Lancer' : '⏸️ Pause'; };
+    btn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play().then(setBtnLabel).catch(() => {});
+      } else {
+        audio.pause();
+        setBtnLabel();
+      }
+    });
 
-    if (btn){
-      btn.addEventListener('click', async () => {
-        try {
-          if (audio.paused) { await audio.play(); }
-          else { audio.pause(); }
-        } catch(e){ /* si autoplay bloqué, le clic débloque */ }
-        syncBtn();
-      });
-    }
+    // Volume
+    volInp.addEventListener('input', (e) => {
+      const v = parseFloat(e.target.value);
+      audio.volume = Number.isFinite(v) ? Math.min(1, Math.max(0, v)) : 0.2;
+    });
 
-    // --- Slider volume
-    const vol = $('volume');
-    if (vol){
-      vol.value = String(audio.volume);
-      vol.addEventListener('input', () => {
-        const v = Math.min(1, Math.max(0, parseFloat(vol.value)));
-        if (!isNaN(v)) {
-          audio.volume = v;
-          localStorage.setItem('musicVolume', String(v));
-        }
-      });
-    }
+    // Si l'utilisateur utilise les contrôles système
+    audio.addEventListener('play',  setBtnLabel);
+    audio.addEventListener('pause', setBtnLabel);
 
-    // Met à jour le texte du bouton si l’état change
-    audio.addEventListener('play',  syncBtn);
-    audio.addEventListener('pause', syncBtn);
-    audio.addEventListener('ended', syncBtn);
-
-    syncBtn();
-  }
-
-  window.addEventListener('DOMContentLoaded', initPlayer);
+    // Label correct au chargement
+    setBtnLabel();
+  });
 })();
-

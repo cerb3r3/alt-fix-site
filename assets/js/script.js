@@ -56,3 +56,32 @@
     setBtnLabel();
   });
 })();
+// ==============================
+// 🎵 Musique unique (videoplayback.m4a)
+// ==============================
+document.addEventListener("DOMContentLoaded", () => {
+  const music = document.getElementById("bg-music");
+  const playBtn = document.getElementById("play-toggle");
+  const volumeSlider = document.getElementById("volume");
+
+  if (!music) return;
+
+  // Volume par défaut
+  music.volume = 0.2;
+
+  // Bouton lecture/pause
+  playBtn.addEventListener("click", () => {
+    if (music.paused) {
+      music.play().catch(() => {});
+      playBtn.textContent = "⏸ Pause";
+    } else {
+      music.pause();
+      playBtn.textContent = "▶️ Lancer";
+    }
+  });
+
+  // Slider volume
+  volumeSlider.addEventListener("input", (e) => {
+    music.volume = e.target.value;
+  });
+});

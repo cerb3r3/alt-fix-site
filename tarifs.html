@@ -9,13 +9,22 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="assets/img/favicon.png" type="image/png">
+
+  <!-- Si tu es sur GitHub Pages à l'URL /alt-fix-site/, tu peux remplacer par :
+       <link rel="stylesheet" href="/alt-fix-site/assets/css/style.css"> -->
   <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- Idem pour JS si besoin en chemin absolu GitHub Pages :
+       <script defer src="/alt-fix-site/assets/js/script.js"></script> -->
   <script defer src="assets/js/script.js"></script>
 </head>
 <body>
 <header class="site-header">
   <div class="container nav">
-    <a class="brand" href="index.html"><img src="assets/img/logo.svg" alt="ALT-FIX logo" width="38" height="38"><span>ALT-FIX</span></a>
+    <a class="brand" href="index.html">
+      <img src="assets/img/logo.svg" alt="ALT-FIX logo" width="38" height="38">
+      <span>ALT-FIX</span>
+    </a>
     <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
     <nav class="menu">
       <a href="index.html">Accueil</a>
@@ -30,15 +39,41 @@
   <section class="section">
     <div class="container">
       <h1 class="section-title">Tarifs indicatifs</h1>
-      <p class="note" style="margin-top:-8px">Montants <strong>hors pièces</strong> (composants, licences, accessoires). Devis gratuit.</p>
+      <p class="note" style="margin-top:-8px">
+        Montants <strong>hors pièces</strong> (composants, licences, accessoires). Devis gratuit.
+      </p>
 
       <div class="grid3">
-        <div class="card price"><h3>Diagnostic</h3><p class="price-tag">Gratuit</p><p>Évaluation rapide et devis.</p></div>
-        <div class="card price"><h3>Dépannage à domicile (1h)</h3><p class="price-tag">45 €</p><p>+ 30 € / h suppl. (hors pièces).</p></div>
-        <div class="card price"><h3>Montage PC</h3><p class="price-tag">80–150 €</p><p>Selon complexité (hors composants).</p></div>
-        <div class="card price"><h3>Réinstallation Windows</h3><p class="price-tag">50 €</p><p>Sauvegarde en option (hors licence).</p></div>
-        <div class="card price"><h3>Nettoyage & optimisation</h3><p class="price-tag">40 €</p><p>Logiciel + matériel (hors pièces).</p></div>
-        <div class="card price"><h3>Installation périphérique</h3><p class="price-tag">25 €</p><p>Imprimante, écran… (hors accessoires).</p></div>
+        <div class="card price">
+          <h3>Diagnostic</h3>
+          <p class="price-tag">Gratuit</p>
+          <p>Évaluation rapide et devis.</p>
+        </div>
+        <div class="card price">
+          <h3>Dépannage à domicile (1h)</h3>
+          <p class="price-tag">45 €</p>
+          <p>+ 30 € / h suppl. (hors pièces).</p>
+        </div>
+        <div class="card price">
+          <h3>Montage PC</h3>
+          <p class="price-tag">80–150 €</p>
+          <p>Selon complexité (hors composants).</p>
+        </div>
+        <div class="card price">
+          <h3>Réinstallation Windows</h3>
+          <p class="price-tag">50 €</p>
+          <p>Sauvegarde en option (hors licence).</p>
+        </div>
+        <div class="card price">
+          <h3>Nettoyage & optimisation</h3>
+          <p class="price-tag">40 €</p>
+          <p>Logiciel + matériel (hors pièces).</p>
+        </div>
+        <div class="card price">
+          <h3>Installation périphérique</h3>
+          <p class="price-tag">25 €</p>
+          <p>Imprimante, écran… (hors accessoires).</p>
+        </div>
       </div>
 
       <p class="note">TVA non applicable, art. 293 B du CGI.</p>
@@ -49,7 +84,11 @@
 
 <footer class="site-footer">
   <div class="container foot">
-    <div class="foot-brand"><img src="assets/img/logo.svg" alt="ALT-FIX logo" width="28" height="28"><strong>ALT-FIX</strong></div>
+    <div class="foot-brand">
+      <img src="assets/img/logo.svg" alt="ALT-FIX logo" width="28" height="28">
+      <strong>ALT-FIX</strong>
+    </div>
+
     <div class="foot-columns">
       <div>
         <h4>Coordonnées</h4>
@@ -68,26 +107,58 @@
         </ul>
       </div>
     </div>
+
     <p class="legal">Micro-entrepreneur — TVA non applicable, art. 293 B du CGI.</p>
     <p class="copy">© 2025 ALT-FIX. Tous droits réservés.</p>
 
+    <!-- 🎵 Lecteur musique intégré -->
+    <!-- Si tu es sur GitHub Pages /alt-fix-site/, tu peux mettre src="/alt-fix-site/assets/music/videoplayback.m4a" -->
+    <audio id="bg-music" preload="metadata" src="assets/music/videoplayback.m4a" loop></audio>
+    <div class="player-ctl" role="group" aria-label="Contrôles musique">
+      <button id="play-toggle" class="btn music" type="button">▶️ Lancer</button>
+      <label for="volume" class="sr-only">Volume</label>
+      <input id="volume" type="range" min="0" max="1" step="0.05" value="0.2" aria-label="Volume">
+    </div>
+  </div>
 </footer>
 
+<!-- Lecteur simple (Play/Pause + Volume) -->
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const audio = document.getElementById('bg-music');
-  const btn   = document.getElementById('play-toggle');
-  const vol   = document.getElementById('volume');
-  if (!audio || !btn || !vol) return;
-  audio.src = 'assets/music/videoplayback.m4a';
-  audio.volume = parseFloat(vol.value || '0.2');
-  const updateBtn = () => btn.textContent = audio.paused ? '▶️ Lancer' : '⏸️ Pause';
-  btn.addEventListener('click', () => { audio.paused ? audio.play().catch(()=>{}) : audio.pause(); });
-  vol.addEventListener('input', e => { audio.volume = parseFloat(e.target.value || '0.2'); });
-  audio.addEventListener('play', updateBtn);
-  audio.addEventListener('pause', updateBtn);
-  updateBtn();
-});
+  document.addEventListener('DOMContentLoaded', () => {
+    const audio = document.getElementById('bg-music');
+    const btn   = document.getElementById('play-toggle');
+    const vol   = document.getElementById('volume');
+    if (!audio || !btn || !vol) return;
 
+    // Volume initial
+    audio.volume = parseFloat(vol.value || '0.2');
+
+    // Met à jour le libellé du bouton
+    const updateBtn = () => { btn.textContent = audio.paused ? '▶️ Lancer' : '⏸️ Pause'; };
+
+    // Play / Pause
+    btn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play().then(updateBtn).catch(() => {});
+      } else {
+        audio.pause();
+        updateBtn();
+      }
+    });
+
+    // Volume
+    vol.addEventListener('input', (e) => {
+      const v = parseFloat(e.target.value);
+      audio.volume = Number.isFinite(v) ? Math.min(1, Math.max(0, v)) : 0.2;
+    });
+
+    // Si l'utilisateur interagit via l'UI système
+    audio.addEventListener('play',  updateBtn);
+    audio.addEventListener('pause', updateBtn);
+
+    // Init
+    updateBtn();
+  });
+</script>
 </body>
 </html>

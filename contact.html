@@ -85,21 +85,46 @@
     <p class="copy">© 2025 ALT-FIX. Tous droits réservés.</p>
   </div>
 </footer>
+
+ <!-- ===== Formulaire de contact ===== -->
+<div class="container">
+  <h1>Contact</h1>
+  <form target="_blank" action="https://formsubmit.co/alt-fix@outlook.fr" method="POST">
+    
+    <!-- Nom -->
+    <div class="form-group">
+      <input type="text" name="name" class="form-control" placeholder="Votre nom complet" required>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <input type="email" name="email" class="form-control" placeholder="Votre adresse email" required>
+    </div>
+
+    <!-- Sujet -->
+    <div class="form-group">
+      <input type="text" name="_subject" class="form-control" placeholder="Sujet du message" required>
+    </div>
+
+    <!-- Message -->
+    <div class="form-group">
+      <textarea name="message" class="form-control" placeholder="Votre message" rows="8" required></textarea>
+    </div>
+
+    <!-- Champs cachés -->
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_next" value="https://cerb3r3.github.io/alt-fix-site/merci.html">
+    <input type="hidden" name="_autoresponse" value="Merci pour votre message 🙏. Nous revenons vers vous au plus vite.">
+
+    <!-- Honeypot anti-spam -->
+    <input type="text" name="_honey" style="display:none">
+
+    <!-- Bouton -->
+    <button type="submit" class="btn btn-lg btn-dark btn-block">Envoyer</button>
+  </form>
+</div>
+<!-- ===== /Formulaire ===== -->
+
 </body>
-     <!-- Formulaire de contact -->
-    <form action="https://formsubmit.co/alt-fix@outlook.com" method="POST" style="display:flex;flex-direction:column;gap:15px;max-width:600px;margin:30px auto;">
-      <input type="text" name="name" placeholder="Votre nom" required>
-      <input type="email" name="email" placeholder="Votre email" required>
-      <input type="text" name="subject" placeholder="Sujet" required>
-      <textarea name="message" placeholder="Votre message" rows="5" required></textarea>
-
-      <!-- Champs cachés -->
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_next" value="https://cerb3r3.github.io/alt-fix-site/merci.html">
-      <input type="text" name="_honey" style="display:none">
-
-      <button type="submit">Envoyer</button>
-    </form>
-  </body>
 </html>

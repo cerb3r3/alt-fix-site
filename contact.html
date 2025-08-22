@@ -86,4 +86,20 @@
   </div>
 </footer>
 </body>
+     <!-- Formulaire de contact -->
+    <form action="https://formsubmit.co/alt-fix@outlook.com" method="POST" style="display:flex;flex-direction:column;gap:15px;max-width:600px;margin:30px auto;">
+      <input type="text" name="name" placeholder="Votre nom" required>
+      <input type="email" name="email" placeholder="Votre email" required>
+      <input type="text" name="subject" placeholder="Sujet" required>
+      <textarea name="message" placeholder="Votre message" rows="5" required></textarea>
+
+      <!-- Champs cachés -->
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" value="https://cerb3r3.github.io/alt-fix-site/merci.html">
+      <input type="text" name="_honey" style="display:none">
+
+      <button type="submit">Envoyer</button>
+    </form>
+  </body>
 </html>

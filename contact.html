@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contact | ALT-FIX</title>
-  <meta name="description" content="ALT-FIX — Montage PC, dépannage et installation informatique à domicile (Genlis / Dijon). Devis gratuit.">
+  <meta name="description" content="Contact ALT-FIX — Genlis / Dijon. Devis gratuit.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -15,10 +15,7 @@
 <body>
 <header class="site-header">
   <div class="container nav">
-    <a class="brand" href="index.html">
-      <img src="assets/img/logo.svg" alt="ALT-FIX logo" width="38" height="38">
-      <span>ALT-FIX</span>
-    </a>
+    <a class="brand" href="index.html"><img src="assets/img/logo.svg" alt="ALT-FIX logo" width="38" height="38"><span>ALT-FIX</span></a>
     <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
     <nav class="menu">
       <a href="index.html">Accueil</a>
@@ -34,21 +31,17 @@
     <div class="container contact">
       <div>
         <h1 class="section-title">Contact</h1>
-
-        <!-- Formulaire FormSubmit -->
+        <!-- FormSubmit -->
         <form target="_blank" action="https://formsubmit.co/alt-fix@outlook.fr" method="POST">
           <label>Nom
             <input type="text" name="name" autocomplete="name" required>
           </label>
-
           <label>Email
             <input type="email" name="email" autocomplete="email" inputmode="email" required>
           </label>
-
           <label>Sujet
             <input type="text" name="_subject" required>
           </label>
-
           <label>Message
             <textarea name="message" rows="5" required></textarea>
           </label>
@@ -60,7 +53,7 @@
             </label>
           </div>
 
-          <!-- Champs cachés -->
+          <!-- FormSubmit hidden -->
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_template" value="table">
           <input type="hidden" name="_next" value="https://cerb3r3.github.io/alt-fix-site/merci.html">
@@ -86,10 +79,7 @@
 
 <footer class="site-footer">
   <div class="container foot">
-    <div class="foot-brand">
-      <img src="assets/img/logo.svg" alt="ALT-FIX logo" width="28" height="28">
-      <strong>ALT-FIX</strong>
-    </div>
+    <div class="foot-brand"><img src="assets/img/logo.svg" alt="ALT-FIX logo" width="28" height="28"><strong>ALT-FIX</strong></div>
     <div class="foot-columns">
       <div>
         <h4>Coordonnées</h4>
@@ -110,16 +100,31 @@
     </div>
     <p class="legal">Micro-entrepreneur — TVA non applicable, art. 293 B du CGI.</p>
     <p class="copy">© 2025 ALT-FIX. Tous droits réservés.</p>
+
+    <audio id="bg-music" preload="metadata"></audio>
+    <div class="player-ctl">
+      <button id="play-toggle" class="btn music" type="button">▶️ Lancer</button>
+      <label for="volume" class="sr-only">Volume</label>
+      <input id="volume" type="range" min="0" max="1" step="0.05" value="0.2">
+    </div>
   </div>
 </footer>
 
-<!-- 🎵 Lecteur -->
-<audio id="bg-music"></audio>
-<div class="player-ctl">
-  <button id="play-toggle" class="btn music" type="button">▶️ Lancer</button>
-  <label for="volume" class="sr-only">Volume</label>
-  <input id="volume" type="range" min="0" max="1" step="0.05" value="0.2" aria-label="Volume">
-</div>
-
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const audio = document.getElementById('bg-music');
+  const btn   = document.getElementById('play-toggle');
+  const vol   = document.getElementById('volume');
+  if (!audio || !btn || !vol) return;
+  audio.src = 'assets/music/videoplayback.m4a';
+  audio.volume = parseFloat(vol.value || '0.2');
+  const updateBtn = () => btn.textContent = audio.paused ? '▶️ Lancer' : '⏸️ Pause';
+  btn.addEventListener('click', () => { audio.paused ? audio.play().catch(()=>{}) : audio.pause(); });
+  vol.addEventListener('input', e => { audio.volume = parseFloat(e.target.value || '0.2'); });
+  audio.addEventListener('play', updateBtn);
+  audio.addEventListener('pause', updateBtn);
+  updateBtn();
+});
+</script>
 </body>
 </html>

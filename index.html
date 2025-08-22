@@ -1,86 +1,158 @@
-// Burger menu (mobile)
-const burger = document.querySelector('.burger');
-const menu = document.querySelector('.menu');
-if (burger && menu) {
+// ==============================
+// ALT-FIX — Script global
+// ==============================
+
+// ---------- Burger menu (mobile)
+(() => {
+  const burger = document.querySelector('.burger');
+  const menu   = document.querySelector('.menu');
+  if (!burger || !menu) return;
+
   burger.addEventListener('click', () => {
     const open = menu.classList.toggle('open');
     burger.setAttribute('aria-expanded', String(open));
   });
-}
+})();
 
+// ==============================
+// 🎵 Musique de fond (playlist + reprise entre pages)
+// ==============================
+(() => {
+  // Les pistes de ta playlist (mets ici .mp3 ou .wav que tu as réellement)
+  const tracks = [
+    'assets/music/piano-chill.wav',
+    'assets/music/lofi-soft.wav',
+    'assets/music/ambient-light.wav'
+  ];
 
-];
+  let currentTrack = 0;
+  let music; // sera défini au DOMContentLoaded
+  let saveTimer;
 
-let currentTrack = 0;
-let music; // sera défini après DOMContentLoaded
+  // Raccourcis clés localStorage
+  const KEY_TRACK  = 'musicTrack';
+  const KEY_TIME   = 'musicTime';
+  const KEY_MUTED  = 'musicMuted';
+  const KEY_VOL    = 'musicVolume';
 
-window.addEventListener('DOMContentLoaded', () => {
-  music = document.getElementById('bg-music');
-  if (!music) return;
-
-  // Charger une piste
+  // Charge une piste par index et lance la lecture
   function loadAndPlay(i) {
-    currentTrack = i % tracks.length;
+    if (!music) return;
+    currentTrack = ((i % tracks.length) + tracks.length) % tracks.length; // modulo sûr
     music.src = tracks[currentTrack];
     music.load();
-    music.play().catch(() => {});
+    music.play().catch(() => {
+      // Autoplay bloqué tant que l'utilisateur n'a pas interagi.
+      // Le bouton "Musique" déclenchera play().
+    });
   }
 
-  // ---------- Reprise depuis localStorage ----------
-  const savedTrack = localStorage.getItem("musicTrack");
-  const savedTime = localStorage.getItem("musicTime");
-  const savedMuted = localStorage.getItem("musicMuted");
-
-  if (savedTrack !== null) {
-    loadAndPlay(parseInt(savedTrack));
-  } else {
-    loadAndPlay(0);
+  // Sauvegarde périodique de l’état
+  function saveState() {
+    if (!music) return;
+    try {
+      localStorage.setItem(KEY_TRACK, String(currentTrack));
+      localStorage.setItem(KEY_TIME,  String(music.currentTime || 0));
+      localStorage.setItem(KEY_MUTED, String(music.muted));
+      localStorage.setItem(KEY_VOL,   String(music.volume));
+    } catch (_) { /* stockage plein/désactivé */ }
   }
 
-  music.addEventListener("loadeddata", () => {
-    if (savedTime !== null) {
-      music.currentTime = parseFloat(savedTime);
-    }
-    if (savedMuted === "false") {
-      music.muted = false;
-      music.play().catch(()=>{});
-    }
-  });
-
-  // ---------- Enchaînement automatique ----------
-  music.addEventListener("ended", () => loadAndPlay(currentTrack + 1));
-
-  // ---------- Sauvegarde avant de quitter ----------
-  window.addEventListener("beforeunload", () => {
-    localStorage.setItem("musicTrack", currentTrack);
-    localStorage.setItem("musicTime", music.currentTime);
-    localStorage.setItem("musicMuted", music.muted);
-  });
-
-  // ---------- Bouton toggle ----------
-  window.toggleMusic = function () {
+  // Expose quelques helpers au scope global (utilisés par les boutons HTML)
+  window.toggleMusic = function toggleMusic() {
+    if (!music) return;
     if (music.muted) {
       music.muted = false;
-      music.play().catch(()=>{});
+      music.play().catch(() => {});
     } else {
       music.muted = true;
       music.pause();
     }
-    localStorage.setItem("musicMuted", music.muted);
+    saveState();
+    // Mets à jour l’icône/label du bouton si tu veux ici
+    const btn = document.querySelector('button.btn.music, button[onclick*="toggleMusic"]');
+    if (btn) btn.textContent = music.muted ? '🔇 Musique' : '🎵 Musique';
   };
 
-  // ---------- Volume ----------
-  window.setVolume = function (v) {
-    const vol = Math.max(0, Math.min(1, parseFloat(v)));
-    music.volume = vol;
-    localStorage.setItem('musicVolume', String(vol));
+  window.setVolume = function setVolume(v) {
+    if (!music) return;
+    const vol = Math.min(1, Math.max(0, parseFloat(v)));
+    music.volume = isNaN(vol) ? 0.2 : vol;
+    if (music.volume > 0 && music.muted) music.muted = false;
+    saveState();
   };
 
-  // Restaurer volume sauvegardé
-  const savedVol = localStorage.getItem('musicVolume');
-  if (savedVol !== null) {
-    music.volume = parseFloat(savedVol);
+  // Initialisation une fois le DOM prêt
+  window.addEventListener('DOMContentLoaded', () => {
+    music = document.getElementById('bg-music');
+    if (!music) return;
+
+    // Volume par défaut (doux)
+    music.volume = 0.2;
+
+    // Restauration de l’état précédent
+    try {
+      const savedTrack = localStorage.getItem(KEY_TRACK);
+      const savedTime  = localStorage.getItem(KEY_TIME);
+      const savedMuted = localStorage.getItem(KEY_MUTED);
+      const savedVol   = localStorage.getItem(KEY_VOL);
+
+      if (savedTrack !== null) {
+        loadAndPlay(parseInt(savedTrack, 10) || 0);
+        // Attends que la metadata soit prête pour positionner le temps
+        music.addEventListener('loadedmetadata', () => {
+          const t = parseFloat(savedTime || '0');
+          if (!isNaN(t) && t > 0 && t < (music.duration || Infinity)) {
+            music.currentTime = t;
+          }
+          // Si non-muet précédemment, tente de lire
+          if (savedMuted === 'false') {
+            music.muted = false;
+            music.play().catch(() => {});
+          } else {
+            music.muted = true;
+          }
+        }, { once: true });
+
+        if (savedVol !== null) {
+          const v = parseFloat(savedVol);
+          if (!isNaN(v)) music.volume = Math.min(1, Math.max(0, v));
+        }
+      } else {
+        // Pas de sauvegarde => démarre au début
+        loadAndPlay(0);
+      }
+    } catch {
+      // Si localStorage indisponible : démarre simplement
+      loadAndPlay(0);
+    }
+
+    // Enchaîne les morceaux
+    music.addEventListener('ended', () => {
+      loadAndPlay(currentTrack + 1);
+      saveState();
+    });
+
+    // Sauvegarde l’état régulièrement
+    saveTimer = setInterval(saveState, 2000);
+
+    // Synchronise le slider de volume si présent
     const volInput = document.getElementById('music-volume');
-    if (volInput) volInput.value = String(music.volume);
-  }
-});
+    if (volInput) {
+      volInput.value = String(music.volume);
+      volInput.addEventListener('input', (e) => {
+        window.setVolume(e.target.value);
+      });
+    }
+
+    // Ajuste le label du bouton musique au chargement
+    const btn = document.querySelector('button.btn.music, button[onclick*="toggleMusic"]');
+    if (btn) btn.textContent = music.muted ? '🔇 Musique' : '🎵 Musique';
+  });
+
+  // Nettoyage si jamais cette page décharge le script (SPA, etc.)
+  window.addEventListener('beforeunload', () => {
+    saveState();
+    if (saveTimer) clearInterval(saveTimer);
+  });
+})();

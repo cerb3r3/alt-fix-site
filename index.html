@@ -124,9 +124,15 @@
       music.pause();
     }
   }
-</script>
+<!-- 🎵 Musique de fond + contrôles -->
 <audio id="bg-music" autoplay muted></audio>
-<button onclick="toggleMusic()" class="btn">🎵 Musique</button>
+
+<div class="music-ctl">
+  <label for="music-volume">🔊 Volume</label>
+  <input id="music-volume" type="range" min="0" max="1" step="0.05" value="0.2" oninput="setVolume(this.value)">
+</div>
+
+<button onclick="toggleMusic()" class="btn music">🎵 Musique</button>
 
 </body>
 </html>

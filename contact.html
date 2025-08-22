@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contact | ALT-FIX</title>
-  <meta name="description" content="ALT-FIX — Montage PC, dépannage et installation informatique à domicile (Genlis / Dijon). Devis gratuit.">
+  <meta name="description" content="Contactez ALT-FIX — Montage PC, dépannage et installation informatique à domicile (Genlis / Dijon).">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -35,8 +35,8 @@
       <div>
         <h1 class="section-title">Contact</h1>
 
-        <!-- ==== Formulaire (FormSubmit) ==== -->
-        <form target="_blank" action="https://formsubmit.co/alt-fix@outlook.fr" method="POST">
+        <!-- FormSubmit -->
+        <form target="_blank" action="https://formsubmit.co/alt-fix@outlook.fr" method="POST" id="contactForm">
           <label>Nom
             <input type="text" name="name" autocomplete="name" required>
           </label>
@@ -46,7 +46,6 @@
           </label>
 
           <label>Sujet
-            <!-- IMPORTANT : name="_subject" pour FormSubmit -->
             <input type="text" name="_subject" required>
           </label>
 
@@ -54,7 +53,6 @@
             <textarea name="message" rows="5" required></textarea>
           </label>
 
-          <!-- ✅ Consentement : structure responsive -->
           <div class="form-group consent">
             <label>
               <input type="checkbox" required>
@@ -62,17 +60,15 @@
             </label>
           </div>
 
-          <!-- Champs cachés FormSubmit -->
+          <!-- Hidden FormSubmit -->
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_template" value="table">
           <input type="hidden" name="_next" value="https://cerb3r3.github.io/alt-fix-site/merci.html">
           <input type="hidden" name="_autoresponse" value="Merci pour votre message 🙏. Nous revenons vers vous au plus vite.">
-          <!-- Honeypot anti-spam -->
           <input type="text" name="_honey" style="display:none">
 
           <button type="submit" class="btn primary">Envoyer</button>
         </form>
-        <!-- ==== /Formulaire ==== -->
       </div>
 
       <aside class="card contact-info">
@@ -94,6 +90,7 @@
       <img src="assets/img/logo.svg" alt="ALT-FIX logo" width="28" height="28">
       <strong>ALT-FIX</strong>
     </div>
+
     <div class="foot-columns">
       <div>
         <h4>Coordonnées</h4>
@@ -112,19 +109,18 @@
         </ul>
       </div>
     </div>
+
     <p class="legal">Micro-entrepreneur — TVA non applicable, art. 293 B du CGI.</p>
     <p class="copy">© 2025 ALT-FIX. Tous droits réservés.</p>
+
+    <!-- 🎵 Lecteur (même footer partout) -->
+    <audio id="bg-music"></audio>
+    <div class="player-ctl" role="group" aria-label="Contrôles musique">
+      <button id="play-toggle" class="btn music" type="button">▶️ Lancer</button>
+      <label for="volume" class="sr-only">Volume</label>
+      <input id="volume" type="range" min="0" max="1" step="0.05" value="0.2" aria-label="Volume">
+    </div>
   </div>
 </footer>
-<!-- 🎵 Lecteur simple (1 piste .m4a) -->
-<audio id="bg-music"></audio>
-
-<div class="player-ctl">
-  <button id="play-toggle" class="btn music">▶️ Lancer</button>
-  <label for="volume">🔊</label>
-  <input id="volume" type="range" min="0" max="1" step="0.05" value="0.2">
-</div>
-
-
 </body>
 </html>

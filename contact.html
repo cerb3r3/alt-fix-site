@@ -35,14 +35,14 @@
       <div>
         <h1 class="section-title">Contact</h1>
 
-        <!-- ==== Formulaire UNIQUE, stylé + branché FormSubmit ==== -->
+        <!-- ==== Formulaire (FormSubmit) ==== -->
         <form target="_blank" action="https://formsubmit.co/alt-fix@outlook.fr" method="POST">
           <label>Nom
-            <input type="text" name="name" required>
+            <input type="text" name="name" autocomplete="name" required>
           </label>
 
           <label>Email
-            <input type="email" name="email" required>
+            <input type="email" name="email" autocomplete="email" inputmode="email" required>
           </label>
 
           <label>Sujet
@@ -54,10 +54,13 @@
             <textarea name="message" rows="5" required></textarea>
           </label>
 
-          <label class="consent">
-            <input type="checkbox" required>
-            J’accepte d’être recontacté au sujet de ma demande.
-          </label>
+          <!-- ✅ Consentement : structure responsive -->
+          <div class="form-group consent">
+            <label>
+              <input type="checkbox" required>
+              <span>J’accepte d’être recontacté au sujet de ma demande.</span>
+            </label>
+          </div>
 
           <!-- Champs cachés FormSubmit -->
           <input type="hidden" name="_captcha" value="false">
@@ -68,7 +71,6 @@
           <input type="text" name="_honey" style="display:none">
 
           <button type="submit" class="btn primary">Envoyer</button>
-          <!-- (on ne met plus de .form-msg ici car on laisse FormSubmit gérer la redirection) -->
         </form>
         <!-- ==== /Formulaire ==== -->
       </div>

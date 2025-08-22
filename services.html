@@ -105,15 +105,15 @@
     <p class="copy">© 2025 ALT-FIX. Tous droits réservés.</p>
   </div>
 </footer>
-<!-- 🎵 Musique de fond + contrôles -->
-<audio id="bg-music" autoplay muted></audio>
+<!-- 🎵 Lecteur (1 piste) -->
+<audio id="bg-music"></audio>
 
-<div class="music-ctl">
-  <label for="music-volume">🔊 Volume</label>
-  <input id="music-volume" type="range" min="0" max="1" step="0.05" value="0.2" oninput="setVolume(this.value)">
+<div class="player-ctl">
+  <button id="play-toggle" class="btn music">▶️ Lancer</button>
+  <label for="volume">🔊</label>
+  <input id="volume" type="range" min="0" max="1" step="0.05" value="0.2">
 </div>
 
-<button onclick="toggleMusic()" class="btn music">🎵 Musique</button>
 
 </body>
 </html>

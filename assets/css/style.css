@@ -270,3 +270,34 @@ textarea {
 @media (max-width:560px) {
   .grid4,.grid3 {grid-template-columns:1fr}
 }
+/* --- Contrôles musique --- */
+.btn.music {
+  position:fixed;
+  right:16px;
+  bottom:16px;
+  z-index:60;
+}
+
+.music-ctl {
+  position:fixed;
+  right:16px;
+  bottom:64px; /* au-dessus du bouton 🎵 */
+  z-index:60;
+  background:rgba(15,23,42,.88);
+  border:1px solid #0b1220;
+  border-radius:10px;
+  padding:8px 10px;
+  color:#e2e8f0;
+  font-size:14px;
+  backdrop-filter:saturate(140%) blur(4px);
+}
+
+.music-ctl label {
+  font-size:13px;
+  color:var(--muted);
+}
+
+.music-ctl input[type="range"] {
+  width:140px;
+  margin-left:8px;
+}

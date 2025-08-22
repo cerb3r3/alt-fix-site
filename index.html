@@ -1,151 +1,99 @@
-// ---------- Burger menu (mobile)
-(() => {
-  const burger = document.querySelector('.burger');
-  const menu   = document.querySelector('.menu');
-  if (!burger || !menu) return;
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Accueil | ALT-FIX</title>
+  <meta name="description" content="ALT-FIX — Montage PC, dépannage et installation informatique à domicile (Genlis / Dijon). Devis gratuit.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script defer src="assets/js/script.js"></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <img src="assets/img/logo.svg" alt="ALT-FIX logo" width="38" height="38">
+      <span>ALT-FIX</span>
+    </a>
+    <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+    <nav class="menu">
+      <a href="index.html" class="active">Accueil</a>
+      <a href="services.html">Services</a>
+      <a href="tarifs.html">Tarifs</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
 
-  burger.addEventListener('click', () => {
-    const open = menu.classList.toggle('open');
-    burger.setAttribute('aria-expanded', String(open));
-  });
-})();
+<main>
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <h1>Votre expert informatique</h1>
+        <p>Montage PC • Dépannage • Installation à domicile (Genlis / Dijon)</p>
+        <div class="cta">
+          <a class="btn primary" href="contact.html">Demander un devis</a>
+          <a class="btn ghost" href="services.html">Voir les services</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="chip"></div>
+      </div>
+    </div>
+  </section>
 
-(() => {
-  // Les pistes de ta playlist (mets ici .mp3 ou .wav que tu as réellement)
-  const tracks = [
-    'assets/music/piano-chill.wav',
-    'assets/music/lofi-soft.wav',
-    'assets/music/ambient-light.wav'
-  ];
+  <section class="why">
+    <div class="container grid4">
+      <div class="card"><h3>Réactif</h3><p>Intervention rapide, RDV flexibles, suivi après service.</p></div>
+      <div class="card"><h3>Transparent</h3><p>Tarifs clairs, devis gratuit avant toute intervention.</p></div>
+      <div class="card"><h3>Garantie</h3><p>Travaux soignés, conseils sur-mesure et durables.</p></div>
+      <div class="card"><h3>Local</h3><p>Genlis, Dijon et alentours. Déplacement possible.</p></div>
+    </div>
+  </section>
+</main>
 
-  let currentTrack = 0;
-  let music; // sera défini au DOMContentLoaded
-  let saveTimer;
+<footer class="site-footer">
+  <div class="container foot">
+    <div class="foot-brand">
+      <img src="assets/img/logo.svg" alt="ALT-FIX logo" width="28" height="28">
+      <strong>ALT-FIX</strong>
+    </div>
+    <div class="foot-columns">
+      <div>
+        <h4>Coordonnées</h4>
+        <ul>
+          <li><a href="mailto:alt-fix@outlook.fr">alt-fix@outlook.fr</a></li>
+          <li><a href="tel:+33651440382">06 51 44 03 82</a></li>
+          <li>Genlis / Dijon et alentours</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Liens</h4>
+        <ul>
+          <li><a href="services.html">Nos services</a></li>
+          <li><a href="tarifs.html">Tarifs</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="legal">Micro-entrepreneur — TVA non applicable, art. 293 B du CGI.</p>
+    <p class="copy">© 2025 ALT-FIX. Tous droits réservés.</p>
+  </div>
+</footer>
 
-  // Raccourcis clés localStorage
-  const KEY_TRACK  = 'musicTrack';
-  const KEY_TIME   = 'musicTime';
-  const KEY_MUTED  = 'musicMuted';
-  const KEY_VOL    = 'musicVolume';
+<!-- 🎵 Musique de fond + contrôles -->
+<audio id="bg-music" autoplay muted></audio>
 
-  // Charge une piste par index et lance la lecture
-  function loadAndPlay(i) {
-    if (!music) return;
-    currentTrack = ((i % tracks.length) + tracks.length) % tracks.length; // modulo sûr
-    music.src = tracks[currentTrack];
-    music.load();
-    music.play().catch(() => {
-      // Autoplay bloqué tant que l'utilisateur n'a pas interagi.
-      // Le bouton "Musique" déclenchera play().
-    });
-  }
+<button onclick="toggleMusic()" class="btn music">🎵 Musique</button>
 
-  // Sauvegarde périodique de l’état
-  function saveState() {
-    if (!music) return;
-    try {
-      localStorage.setItem(KEY_TRACK, String(currentTrack));
-      localStorage.setItem(KEY_TIME,  String(music.currentTime || 0));
-      localStorage.setItem(KEY_MUTED, String(music.muted));
-      localStorage.setItem(KEY_VOL,   String(music.volume));
-    } catch (_) { /* stockage plein/désactivé */ }
-  }
+<div class="music-ctl">
+  <label for="music-volume">🔊 Volume</label>
+  <input id="music-volume" type="range" min="0" max="1" step="0.05" value="0.2" oninput="setVolume(this.value)">
+</div>
 
-  // Expose quelques helpers au scope global (utilisés par les boutons HTML)
-  window.toggleMusic = function toggleMusic() {
-    if (!music) return;
-    if (music.muted) {
-      music.muted = false;
-      music.play().catch(() => {});
-    } else {
-      music.muted = true;
-      music.pause();
-    }
-    saveState();
-    // Mets à jour l’icône/label du bouton si tu veux ici
-    const btn = document.querySelector('button.btn.music, button[onclick*="toggleMusic"]');
-    if (btn) btn.textContent = music.muted ? '🔇 Musique' : '🎵 Musique';
-  };
-
-  window.setVolume = function setVolume(v) {
-    if (!music) return;
-    const vol = Math.min(1, Math.max(0, parseFloat(v)));
-    music.volume = isNaN(vol) ? 0.2 : vol;
-    if (music.volume > 0 && music.muted) music.muted = false;
-    saveState();
-  };
-
-  // Initialisation une fois le DOM prêt
-  window.addEventListener('DOMContentLoaded', () => {
-    music = document.getElementById('bg-music');
-    if (!music) return;
-
-    // Volume par défaut (doux)
-    music.volume = 0.2;
-
-    // Restauration de l’état précédent
-    try {
-      const savedTrack = localStorage.getItem(KEY_TRACK);
-      const savedTime  = localStorage.getItem(KEY_TIME);
-      const savedMuted = localStorage.getItem(KEY_MUTED);
-      const savedVol   = localStorage.getItem(KEY_VOL);
-
-      if (savedTrack !== null) {
-        loadAndPlay(parseInt(savedTrack, 10) || 0);
-        // Attends que la metadata soit prête pour positionner le temps
-        music.addEventListener('loadedmetadata', () => {
-          const t = parseFloat(savedTime || '0');
-          if (!isNaN(t) && t > 0 && t < (music.duration || Infinity)) {
-            music.currentTime = t;
-          }
-          // Si non-muet précédemment, tente de lire
-          if (savedMuted === 'false') {
-            music.muted = false;
-            music.play().catch(() => {});
-          } else {
-            music.muted = true;
-          }
-        }, { once: true });
-
-        if (savedVol !== null) {
-          const v = parseFloat(savedVol);
-          if (!isNaN(v)) music.volume = Math.min(1, Math.max(0, v));
-        }
-      } else {
-        // Pas de sauvegarde => démarre au début
-        loadAndPlay(0);
-      }
-    } catch {
-      // Si localStorage indisponible : démarre simplement
-      loadAndPlay(0);
-    }
-
-    // Enchaîne les morceaux
-    music.addEventListener('ended', () => {
-      loadAndPlay(currentTrack + 1);
-      saveState();
-    });
-
-    // Sauvegarde l’état régulièrement
-    saveTimer = setInterval(saveState, 2000);
-
-    // Synchronise le slider de volume si présent
-    const volInput = document.getElementById('music-volume');
-    if (volInput) {
-      volInput.value = String(music.volume);
-      volInput.addEventListener('input', (e) => {
-        window.setVolume(e.target.value);
-      });
-    }
-
-    // Ajuste le label du bouton musique au chargement
-    const btn = document.querySelector('button.btn.music, button[onclick*="toggleMusic"]');
-    if (btn) btn.textContent = music.muted ? '🔇 Musique' : '🎵 Musique';
-  });
-
-  // Nettoyage si jamais cette page décharge le script (SPA, etc.)
-  window.addEventListener('beforeunload', () => {
-    saveState();
-    if (saveTimer) clearInterval(saveTimer);
-  });
-})();
+</body>
+</html>

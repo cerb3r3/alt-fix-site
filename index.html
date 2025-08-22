@@ -1,15 +1,12 @@
-v<!doctype html>
+<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Accueil | ALT-FIX</title>
   <meta name="description" content="ALT-FIX — Montage PC, dépannage et installation informatique à domicile (Genlis / Dijon). Devis gratuit.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" href="assets/img/favicon.png" type="image/png">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
   <script defer src="assets/js/script.js"></script>
 </head>
 <body>
@@ -40,9 +37,12 @@ v<!doctype html>
           <a class="btn ghost" href="services.html">Voir les services</a>
         </div>
       </div>
-      <div class="hero-art" aria-hidden="true">
-        <div class="chip"></div>
-      </div>
+      <!-- Zone promo à droite -->
+      <aside class="promo-box card">
+        <h3>🎁 Offre spéciale</h3>
+        <p>Bientôt ici : <em>antivirus 1 mois gratuit</em> ou autres promos.</p>
+        <small>(Zone personnalisable)</small>
+      </aside>
     </div>
   </section>
 
@@ -62,32 +62,11 @@ v<!doctype html>
       <img src="assets/img/logo.svg" alt="ALT-FIX logo" width="28" height="28">
       <strong>ALT-FIX</strong>
     </div>
-
-    <div class="foot-columns">
-      <div>
-        <h4>Coordonnées</h4>
-        <ul>
-          <li><a href="mailto:alt-fix@outlook.fr">alt-fix@outlook.fr</a></li>
-          <li><a href="tel:+33651440382">06 51 44 03 82</a></li>
-          <li>Genlis / Dijon et alentours</li>
-        </ul>
-      </div>
-      <div>
-        <h4>Liens</h4>
-        <ul>
-          <li><a href="services.html">Nos services</a></li>
-          <li><a href="tarifs.html">Tarifs</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <p class="legal">Micro-entrepreneur — TVA non applicable, art. 293 B du CGI.</p>
     <p class="copy">© 2025 ALT-FIX. Tous droits réservés.</p>
 
-    <!-- 🎵 Lecteur musique (intégré au footer) -->
+    <!-- 🎵 Lecteur -->
     <audio id="bg-music"></audio>
-    <div class="player-ctl" role="group" aria-label="Contrôles musique">
+    <div class="player-ctl">
       <button id="play-toggle" class="btn music" type="button">▶️ Lancer</button>
       <label for="volume" class="sr-only">Volume</label>
       <input id="volume" type="range" min="0" max="1" step="0.05" value="0.2" aria-label="Volume">
@@ -96,4 +75,3 @@ v<!doctype html>
 </footer>
 </body>
 </html>
-

@@ -11,33 +11,6 @@
   <link rel="icon" href="assets/img/favicon.png" type="image/png">
   <link rel="stylesheet" href="assets/css/style.css">
   <script defer src="assets/js/script.js"></script>
-  <style>
-    /* Ruban "Nouveau" pour les nouvelles cartes */
-    .badge-new{
-      display:inline-block;
-      margin-left:8px;
-      padding:2px 8px;
-      font-size:12px;
-      border-radius:999px;
-      background:rgba(56,189,248,.18);
-      border:1px solid rgba(56,189,248,.45);
-      color:var(--text);
-      vertical-align:middle;
-    }
-    /* Bandeau d’annonce */
-    .announce{
-      background:linear-gradient(180deg, rgba(56,189,248,.10), transparent), var(--bg);
-      border-top:1px solid #0b1220;
-      border-bottom:1px solid #0b1220;
-      padding:18px 0;
-    }
-    .announce .inner{
-      display:flex; gap:10px; align-items:center; justify-content:center; text-align:center;
-      color:var(--text);
-    }
-    .announce strong{ color:var(--accent); }
-    .announce a.btn{ margin-left:10px; }
-  </style>
 </head>
 <body>
 <header class="site-header">
@@ -51,6 +24,7 @@
       <a href="index.html" class="active">Accueil</a>
       <a href="services.html">Services</a>
       <a href="tarifs.html">Tarifs</a>
+      <a href="market.html">Boutique</a>
       <a href="contact.html">Contact</a>
     </nav>
   </div>
@@ -58,7 +32,7 @@
 
 <main>
 
-  <!-- Hero -->
+  <!-- HERO -->
   <section class="hero">
     <div class="container hero-inner">
       <div class="hero-text">
@@ -69,17 +43,26 @@
           <a class="btn ghost" href="services.html">Voir les services</a>
         </div>
       </div>
-      <div class="hero-art" aria-hidden="true">
-        <div class="chip"></div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Bandeau annonce nouveaux services -->
-  <section class="announce">
-    <div class="container inner">
-      <span>🆕 Nouveaux services : <strong>Pose vitre smartphone</strong> & <strong>Assistance à distance</strong></span>
-      <a class="btn" href="tarifs.html">Voir les tarifs</a>
+      <!-- ➜ Panneau promo "Licence Windows" + flèches -->
+      <div class="hero-art">
+        <div class="promo-card">
+          <h3>Licence Windows 11 (officielle)</h3>
+          <p>Régularisez votre PC avec une licence authentique + service d’installation.</p>
+          <div class="promo-actions">
+            <!-- ⚠️ Mets ICI TON lien Stripe/PayPal -> paiement direct sur ton compte -->
+            <a class="btn primary" href="https://www.paypal.com/paypalme/TONCOMPTE" target="_blank" rel="noopener">Payer en ligne</a>
+            <!-- Lien officiel Microsoft (info/achat) -->
+            <a class="btn ghost" href="https://www.microsoft.com/software-download/windows11" target="_blank" rel="noopener">Acheter chez Microsoft</a>
+          </div>
+          <small class="note">Clé fournie par le client ou via revendeur agréé. Facture nominative. Tarifs hors licence.</small>
+        </div>
+
+        <div class="hero-arrows">
+          <a class="arrow left" href="services.html" aria-label="Aller à Services">←</a>
+          <a class="arrow right" href="tarifs.html" aria-label="Aller à Tarifs">→</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -93,7 +76,7 @@
     </div>
   </section>
 
-  <!-- Mise en avant services (avec "Nouveau") -->
+  <!-- Prestations populaires + Antivirus (à venir) -->
   <section class="section">
     <div class="container">
       <h2 class="section-title">Prestations populaires</h2>
@@ -104,28 +87,27 @@
         </div>
         <div class="card">
           <h3>Dépannage</h3>
-          <p>PC lent, virus, erreurs Windows — on remet tout en état.</p>
+          <p>PC lent, erreurs Windows, virus — on remet tout en état.</p>
         </div>
         <div class="card">
           <h3>Installation</h3>
           <p>Windows, logiciels, imprimantes/écrans, réseau domestique.</p>
         </div>
         <div class="card">
-          <h3>Pose vitre smartphone <span class="badge-new">Nouveau</span></h3>
-          <p>Pose soignée (hors vitre). Pack vitre + pose possible.</p>
-        </div>
-        <div class="card">
-          <h3>Assistance à distance <span class="badge-new">Nouveau</span></h3>
-          <p>Prise en main sécurisée : réglages, installation, conseils.</p>
-        </div>
-        <div class="card">
           <h3>Nettoyage & MX</h3>
           <p>Dépoussiérage, pâte thermique, gestion des câbles.</p>
         </div>
+        <div class="card">
+          <h3>Assistance à distance</h3>
+          <p>Réglages, installations, conseils via prise en main sécurisée.</p>
+        </div>
+        <div class="card soon">
+          <h3>Antivirus pro <span class="badge">À venir</span></h3>
+          <p>Partenariat en cours. En attendant : installation/config de l’antivirus de votre choix.</p>
+        </div>
       </div>
-
       <div class="center" style="margin-top:20px">
-        <a class="btn primary" href="tarifs.html">Consulter les tarifs</a>
+        <a class="btn primary" href="market.html">Accéder à la boutique</a>
       </div>
     </div>
   </section>
@@ -152,6 +134,7 @@
         <ul>
           <li><a href="services.html">Nos services</a></li>
           <li><a href="tarifs.html">Tarifs</a></li>
+          <li><a href="market.html">Boutique</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
@@ -162,3 +145,4 @@
 </footer>
 </body>
 </html>
+

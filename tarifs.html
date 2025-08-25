@@ -10,12 +10,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="assets/img/favicon.png" type="image/png">
 
-  <!-- Si tu es sur GitHub Pages à l'URL /alt-fix-site/, tu peux remplacer par :
-       <link rel="stylesheet" href="/alt-fix-site/assets/css/style.css"> -->
+  <!-- Si ton site est servi depuis /alt-fix-site/ sur GitHub Pages, utilise plutôt :
+  <link rel="stylesheet" href="/alt-fix-site/assets/css/style.css"> -->
   <link rel="stylesheet" href="assets/css/style.css">
 
-  <!-- Idem pour JS si besoin en chemin absolu GitHub Pages :
-       <script defer src="/alt-fix-site/assets/js/script.js"></script> -->
+  <!-- JS global (burger menu, etc.). Si besoin en chemin absolu GitHub Pages :
+  <script defer src="/alt-fix-site/assets/js/script.js"></script> -->
   <script defer src="assets/js/script.js"></script>
 </head>
 <body>
@@ -39,45 +39,71 @@
   <section class="section">
     <div class="container">
       <h1 class="section-title">Tarifs indicatifs</h1>
+
+      <!-- Mention "hors pièces" claire -->
       <p class="note" style="margin-top:-8px">
         Montants <strong>hors pièces</strong> (composants, licences, accessoires). Devis gratuit.
       </p>
 
       <div class="grid3">
+
         <div class="card price">
           <h3>Diagnostic</h3>
           <p class="price-tag">Gratuit</p>
           <p>Évaluation rapide et devis.</p>
         </div>
+
         <div class="card price">
           <h3>Dépannage à domicile (1h)</h3>
           <p class="price-tag">45 €</p>
           <p>+ 30 € / h suppl. (hors pièces).</p>
         </div>
+
         <div class="card price">
           <h3>Montage PC</h3>
           <p class="price-tag">80–150 €</p>
           <p>Selon complexité (hors composants).</p>
         </div>
+
         <div class="card price">
           <h3>Réinstallation Windows</h3>
           <p class="price-tag">50 €</p>
           <p>Sauvegarde en option (hors licence).</p>
         </div>
+
         <div class="card price">
           <h3>Nettoyage & optimisation</h3>
           <p class="price-tag">40 €</p>
           <p>Logiciel + matériel (hors pièces).</p>
         </div>
+
         <div class="card price">
           <h3>Installation périphérique</h3>
           <p class="price-tag">25 €</p>
           <p>Imprimante, écran… (hors accessoires).</p>
         </div>
+
+        <!-- 🆕 Pose vitre smartphone -->
+        <div class="card price">
+          <h3>Pose vitre smartphone</h3>
+          <p class="price-tag">10 €</p>
+          <p>Pose soignée (hors vitre). Pack vitre + pose <span class="note">15–25 € selon modèle</span>.</p>
+        </div>
+
+        <!-- 🆕 Assistance à distance -->
+        <div class="card price">
+          <h3>Assistance à distance (30 min)</h3>
+          <p class="price-tag">20 €</p>
+          <p>Installation, réglages, conseils. Au-delà : <span class="note">+20 € / 30 min</span>.</p>
+        </div>
+
       </div>
 
       <p class="note">TVA non applicable, art. 293 B du CGI.</p>
-      <div class="center"><a class="btn primary" href="contact.html">Demander un devis</a></div>
+
+      <div class="center">
+        <a class="btn primary" href="contact.html">Demander un devis</a>
+      </div>
     </div>
   </section>
 </main>
@@ -110,9 +136,11 @@
 
     <p class="legal">Micro-entrepreneur — TVA non applicable, art. 293 B du CGI.</p>
     <p class="copy">© 2025 ALT-FIX. Tous droits réservés.</p>
+  </div>
+</footer>
+</body>
+</html>
 
-   
-</script> 
     
    </body>
   </html>

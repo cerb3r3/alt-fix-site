@@ -11,12 +11,40 @@
   <link rel="icon" href="assets/img/favicon.png" type="image/png">
   <link rel="stylesheet" href="assets/css/style.css">
   <script defer src="assets/js/script.js"></script>
+  <style>
+    /* Ruban "Nouveau" pour les nouvelles cartes */
+    .badge-new{
+      display:inline-block;
+      margin-left:8px;
+      padding:2px 8px;
+      font-size:12px;
+      border-radius:999px;
+      background:rgba(56,189,248,.18);
+      border:1px solid rgba(56,189,248,.45);
+      color:var(--text);
+      vertical-align:middle;
+    }
+    /* Bandeau d’annonce */
+    .announce{
+      background:linear-gradient(180deg, rgba(56,189,248,.10), transparent), var(--bg);
+      border-top:1px solid #0b1220;
+      border-bottom:1px solid #0b1220;
+      padding:18px 0;
+    }
+    .announce .inner{
+      display:flex; gap:10px; align-items:center; justify-content:center; text-align:center;
+      color:var(--text);
+    }
+    .announce strong{ color:var(--accent); }
+    .announce a.btn{ margin-left:10px; }
+  </style>
 </head>
 <body>
 <header class="site-header">
   <div class="container nav">
     <a class="brand" href="index.html">
-      <img src="assets/img/logo.svg" alt="ALT-FIX logo" width="38" height="38"><span>ALT-FIX</span>
+      <img src="assets/img/logo.svg" alt="ALT-FIX logo" width="38" height="38">
+      <span>ALT-FIX</span>
     </a>
     <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
     <nav class="menu">
@@ -29,6 +57,8 @@
 </header>
 
 <main>
+
+  <!-- Hero -->
   <section class="hero">
     <div class="container hero-inner">
       <div class="hero-text">
@@ -39,10 +69,21 @@
           <a class="btn ghost" href="services.html">Voir les services</a>
         </div>
       </div>
-      <div class="hero-art" aria-hidden="true"><div class="chip"></div></div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="chip"></div>
+      </div>
     </div>
   </section>
 
+  <!-- Bandeau annonce nouveaux services -->
+  <section class="announce">
+    <div class="container inner">
+      <span>🆕 Nouveaux services : <strong>Pose vitre smartphone</strong> & <strong>Assistance à distance</strong></span>
+      <a class="btn" href="tarifs.html">Voir les tarifs</a>
+    </div>
+  </section>
+
+  <!-- Pourquoi nous -->
   <section class="section">
     <div class="container grid4">
       <div class="card"><h3>Réactif</h3><p>Intervention rapide, RDV flexibles, suivi après service.</p></div>
@@ -51,11 +92,52 @@
       <div class="card"><h3>Local</h3><p>Genlis, Dijon et alentours. Déplacement possible.</p></div>
     </div>
   </section>
+
+  <!-- Mise en avant services (avec "Nouveau") -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Prestations populaires</h2>
+      <div class="grid3">
+        <div class="card">
+          <h3>Montage PC</h3>
+          <p>Conseils pièces, assemblage propre, tests & optimisation.</p>
+        </div>
+        <div class="card">
+          <h3>Dépannage</h3>
+          <p>PC lent, virus, erreurs Windows — on remet tout en état.</p>
+        </div>
+        <div class="card">
+          <h3>Installation</h3>
+          <p>Windows, logiciels, imprimantes/écrans, réseau domestique.</p>
+        </div>
+        <div class="card">
+          <h3>Pose vitre smartphone <span class="badge-new">Nouveau</span></h3>
+          <p>Pose soignée (hors vitre). Pack vitre + pose possible.</p>
+        </div>
+        <div class="card">
+          <h3>Assistance à distance <span class="badge-new">Nouveau</span></h3>
+          <p>Prise en main sécurisée : réglages, installation, conseils.</p>
+        </div>
+        <div class="card">
+          <h3>Nettoyage & MX</h3>
+          <p>Dépoussiérage, pâte thermique, gestion des câbles.</p>
+        </div>
+      </div>
+
+      <div class="center" style="margin-top:20px">
+        <a class="btn primary" href="tarifs.html">Consulter les tarifs</a>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer class="site-footer">
   <div class="container foot">
-    <div class="foot-brand"><img src="assets/img/logo.svg" alt="ALT-FIX logo" width="28" height="28"><strong>ALT-FIX</strong></div>
+    <div class="foot-brand">
+      <img src="assets/img/logo.svg" alt="ALT-FIX logo" width="28" height="28">
+      <strong>ALT-FIX</strong>
+    </div>
     <div class="foot-columns">
       <div>
         <h4>Coordonnées</h4>
@@ -76,11 +158,7 @@
     </div>
     <p class="legal">Micro-entrepreneur — TVA non applicable, art. 293 B du CGI.</p>
     <p class="copy">© 2025 ALT-FIX. Tous droits réservés.</p>
-
-
+  </div>
 </footer>
-
-</a>
-
 </body>
 </html>

@@ -36,6 +36,7 @@ a { color:var(--accent); text-decoration:none; }
 .menu { display:flex; gap:18px; }
 .menu a { padding:10px 12px; border-radius:8px; color:var(--text); }
 .menu a.active, .menu a:hover { background:rgba(56,189,248,.12); }
+#install-app{ display:none; }
 
 .burger { display:none; background:none; color:var(--text); font-size:22px; border:0; }
 

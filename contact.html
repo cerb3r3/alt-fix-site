@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALT-FIX - Contact</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/script.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="assets/img/logo.png" alt="ALT-FIX Logo">
+            <span>ALT-FIX</span>
+        </div>
+        <button id="menu-toggle" aria-label="Menu mobile">☰</button>
+        <nav id="main-nav">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="contact-section">
+            <h1>Contactez-nous</h1>
+            <form id="contact-form">
+                <label for="name">Nom</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+
+                <button type="submit" class="btn">Envoyer</button>
+            </form>
+            <p class="contact-email">
+                Vous pouvez aussi nous écrire à
+                <a href="mailto:alt-fix@outlook.fr">alt-fix@outlook.fr</a>
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 ALT-FIX. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
